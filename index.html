@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.3.0rc4"/>
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.3.0rc5"/>
 
 
     <meta name="description" content="Write blog and Stay foolish!" />
@@ -22,7 +22,7 @@
 
 
 
-    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.3.0rc4" />
+    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.3.0rc5" />
 
 
 
@@ -150,7 +150,8 @@
         
 
         
-          <div class="post-eof the-shape"></div>
+        
+          <div class="post-eof"></div>
         
       </div>
     
@@ -194,7 +195,7 @@
             <span class="site-state-item-name">标签</span>
         </div>
         <div class="site-state-item site-state-pages">
-            <span class="site-state-item-count">0</span>
+            <span class="site-state-item-count">1</span>
             <span class="site-state-item-name">页面</span>
         </div>
       </div>
@@ -256,16 +257,24 @@
   </script>
 
   <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
   function isDesktop () {
-    return screen.width > 991;
+    return screen.width > 991 && !hasMobileUA();
   }
 
   function isTablet () {
-    return screen.width < 992 && screen.width > 767;
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
   }
 
   function isMobile () {
-    return screen.width < 767;
+    return screen.width < 767 && hasMobileUA();
   }
 
   function escapeSelector (selector) {
@@ -324,16 +333,14 @@
 
 
     $(document)
-      .on('sidebar.show', function () {
+      .on('sidebar.isShowing', function () {
         isDesktop() && body.velocity(
           {paddingRight: SIDEBAR_WIDTH},
           SIDEBAR_DISPLAY_DURATION
         );
         sidebarContentMotion();
       })
-      .on('sidebar.hide', function () {
-
-      });
+      .on('sidebar.isHiding', function () {});
 
 
     function backToTopMotion () {
@@ -349,8 +356,14 @@
       sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
       sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
 
-      sidebar.velocity({width: SIDEBAR_WIDTH}, SIDEBAR_DISPLAY_DURATION);
-      sidebar.trigger('sidebar.show');
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
     }
 
     function sidebarHideMotion () {
@@ -361,7 +374,8 @@
       sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
       sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
 
-      sidebar.trigger('sidebar.hide');
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
     };
 
     function sidebarContentMotion () {
