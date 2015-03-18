@@ -159,12 +159,31 @@
 
         
           
-            It's easy to build your blog with Hexo. This article will teach you how to make it.
-            <div class="post-more-link text-center">
-              <a class="btn" href="/2015/03/12/Build-your-blog-with-Hexo/">
-                阅读全文 &raquo;
-              </a>
-            </div>
+            <h2 id="Github_Pages_Quick_Start">Github Pages Quick Start</h2><p>Websites for you and your projects. Hosted directly from your <a href="https://github.com/" target="_blank" rel="external">GitHub repository</a>. Just edit, push, and your changes are live.</p>
+<h3 id="Create_a_repository">Create a repository</h3><p>Head over to <a href="https://github.com/" target="_blank" rel="external">GitHub</a> and <a href="https://github.com/new" target="_blank" rel="external">create a new repository</a> named username.github.io, where username is your username (or organization name) on GitHub.</p>
+<blockquote>
+<p>If the first part of the repository doesn’t exactly match your username, it won’t work, so make sure to get it right.</p>
+</blockquote>
+<h3 id="Clone_the_repository">Clone the repository</h3><p>Go to the folder where you want to store your project, and clone the new repository:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ $ git <span class="built_in">clone</span> https://github.com/username/username.github.io</span><br></pre></td></tr></table></figure>
+<h3 id="Hello_World">Hello World</h3><p>Enter the project folder and add an index.html file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ $ <span class="built_in">cd</span> username.github.io</span><br><span class="line">~ $ <span class="built_in">echo</span> <span class="string">"Hello World"</span> &gt; index.html</span><br></pre></td></tr></table></figure>
+<h3 id="Push_it">Push it</h3><p>Add, commit, and push your changes:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ $ git add --all</span><br><span class="line">~ $ git commit -m <span class="string">"Initial commit"</span></span><br><span class="line">~ $ git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="…and_you’re_done!">…and you’re done!</h3><p>Fire up a browser and go to <a href="http://username.github.io" target="_blank" rel="external">http://username.github.io</a>.</p>
+<blockquote class="blockquote-center">OK</blockquote>
+
+
+<h2 id="Hexo_Quick_Start">Hexo Quick Start</h2><p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
           
         
       </div>
