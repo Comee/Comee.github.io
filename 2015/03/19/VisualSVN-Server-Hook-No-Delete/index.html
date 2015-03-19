@@ -1,0 +1,909 @@
+<!doctype html>
+<html class="theme-next use-motion">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.3.0rc5"/>
+
+
+    <meta name="description" content="Write blog and Stay foolish!" />
+
+
+
+	<meta name="keywords" content="SVN,VisualSVN Server," />
+
+  <title> VisualSVN Server Hook: No Delete // Comee </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+    <a href="/" class="brand">
+        <span class="logo">
+          <i class="icon-logo"></i>
+        </span>
+        <span class="site-title">Comee</span>
+    </a>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+            
+          
+
+          <div id="posts" class="posts-expand">
+            
+  
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              VisualSVN Server Hook: No Delete
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+          <span class="post-time">
+            
+              发表于 2015-03-19
+            
+          </span>
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/03/19/VisualSVN-Server-Hook-No-Delete/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/19/VisualSVN-Server-Hook-No-Delete/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <h2 id="Subversion_Repository_Hooks"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/" target="_blank" rel="external">Subversion Repository Hooks</a></h2><p>These are the repository hooks that Subversion provides:</p>
+<ul>
+<li>start-commit</li>
+<li>pre-commit</li>
+<li>post-commit</li>
+<li>pre-revprop-change</li>
+<li>post-revprop-change</li>
+<li>pre-lock</li>
+<li>post-lock</li>
+<li>pre-unlock</li>
+<li>post-unlock</li>
+</ul>
+<a id="more"></a>
+<h3 id="start-commit"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/start-commit/" target="_blank" rel="external">start-commit</a></h3><p>start-commit — Notification of the beginning of a commit.</p>
+<h4 id="Description">Description</h4><p>The <em>start-commit</em> hook is run before the commit transaction is even created. It is typically used to decide whether the user has commit privileges at all.</p>
+<p>If the start-commit hook program returns a nonzero exit value, the commit is stopped before the commit transaction is even created, and anything printed to <em>stderr</em> is marshalled back to the client.</p>
+<h4 id="Input_Parameter(s)">Input Parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ul>
+<li>Repository path</li>
+<li>Authenticated username attempting the commit</li>
+<li>Colon-separated list of capabilities that a client passes to the server, including <em>depth</em>, <em>mergeinfo</em>, and <em>log-revprops</em> (new in Subversion 1.5).</li>
+</ul>
+<h4 id="Common_uses">Common uses</h4><p>Access control (e.g., temporarily lock out commits for some reason).</p>
+<p>A means to allow access only from clients that have certain capabilities.</p>
+<h3 id="pre-commit"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/pre-commit/" target="_blank" rel="external">pre-commit</a></h3><p>pre-commit — Notification just prior to commit completion.</p>
+<h4 id="Description-1">Description</h4><p>The <em>pre-commit</em> hook is run just before a commit transaction is promoted to a new revision. Typically, this hook is used to protect against commits that are disallowed due to content or location (e.g., your site might require that all commits to a certain branch include a ticket number from the bug tracker, or that the incoming log message is nonempty).</p>
+<p>If the pre-commit hook program returns a nonzero exit value, the commit is aborted, the commit transaction is removed, and anything printed to stderr is marshalled back to the client.</p>
+<h4 id="Input_parameter(s)">Input parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ul>
+<li>Repository path</li>
+<li>Commit transaction name</li>
+</ul>
+<p>Additionally, Subversion passes any lock tokens provided by the committing client to the hook script via standard input. When present, these are formatted as a single line containing the string <em>LOCK-TOKENS:</em>, followed by additional lines—one per lock token—which contain the lock token information. Each lock token information line consists of the URI-escaped repository filesystem path associated with the lock, followed by the pipe (|) separator character, and finally the lock token string.</p>
+<h4 id="Common_uses-1">Common uses</h4><p>Change validation and control</p>
+<h3 id="post-commit"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/post-commit/" target="_blank" rel="external">post-commit</a></h3><p>post-commit — Notification of a successful commit.</p>
+<h4 id="Description-2">Description</h4><p>The <em>post-commit</em> hook is run after the transaction is committed and a new revision is created. Most people use this hook to send out descriptive emails about the commit or to notify some other tool (such as an issue tracker) that a commit has happened. Some configurations also use this hook to trigger backup processes.</p>
+<p>If the <em>post-commit</em> hook returns a nonzero exit status, the commit will not be aborted since it has already completed. However, anything that the hook printed to <em>stderr</em> will be marshalled back to the client, making it easier to diagnose hook failures.</p>
+<h4 id="Input_parameter(s)-1">Input parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ul>
+<li>Repository path</li>
+<li>Revision number created by the commit</li>
+</ul>
+<h4 id="Common_uses-2">Common uses</h4><p>Commit notification; tool integration</p>
+<h3 id="pre-revprop-change"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/pre-revprop-change/" target="_blank" rel="external">pre-revprop-change</a></h3><p>pre-revprop-change — Notification of a revision property change attempt.</p>
+<h4 id="Description-3">Description</h4><p>The <em>pre-revprop-change</em> hook is run immediately prior to the modification of a revision property when performed outside the scope of a normal commit. Unlike the other hooks, the default state of this one is to deny the proposed action. The hook must actually exist and return a zero exit value before a revision property modification can happen.<br>If the <em>pre-revprop-change</em> hook doesn’t exist, isn’t executable, or returns a nonzero exit value, no change to the property will be made, and anything printed to <em>stderr</em> is marshalled back to the client.</p>
+<h4 id="Input_parameter(s)-2">Input parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ul>
+<li>Repository path</li>
+<li>Revision whose property is about to be modified</li>
+<li>Authenticated username attempting the property change</li>
+<li>Name of the property changed</li>
+<li>Change description: <em>A</em> (added), <em>D</em> (deleted), or <em>M</em> (modified)</li>
+</ul>
+<p>Additionally, Subversion passes the intended new value of the property to the hook program via standard input.</p>
+<h4 id="Common_uses-3">Common uses</h4><p>Access control; change validation and control</p>
+<h3 id="post-revprop-change"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/post-revprop-change/" target="_blank" rel="external">post-revprop-change</a></h3><p>post-revprop-change — Notification of a successful revision property change.</p>
+<h4 id="Description-4">Description</h4><p>The <em>post-revprop-change</em> hook is run immediately after the modification of a revision property when performed outside the scope of a normal commit. As you can derive from the description of its counterpart, the <em>pre-revprop-change</em> hook, this hook will not run at all unless the <em>pre-revprop-change</em> hook is implemented. It is typically used to send email notification of the property change.</p>
+<p>If the <em>post-revprop-change</em> hook returns a nonzero exit status, the change will not be aborted since it has already completed. However, anything that the hook printed to <em>stderr</em> will be marshalled back to the client, making it easier to diagnose hook failures.</p>
+<h4 id="Input_parameter(s)-3">Input parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ul>
+<li>Repository path</li>
+<li>Revision whose property was modified</li>
+<li>Authenticated username of the person making the change</li>
+<li>Name of the property changed<br>Change description: <em>A</em> (added), <em>D</em> (deleted), or <em>M</em> (modified)</li>
+</ul>
+<p>Additionally, Subversion passes to the hook program, via standard input, the previous value of the property.</p>
+<h4 id="Common_uses-4">Common uses</h4><p>Property change notification</p>
+<h3 id="pre-lock"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/pre-lock/" target="_blank" rel="external">pre-lock</a></h3><p>pre-lock — Notification of a path lock attempt.</p>
+<h4 id="Description-5">Description</h4><p>The <em>pre-lock</em> hook runs whenever someone attempts to lock a path. It can be used to prevent locks altogether or to create a more complex policy specifying exactly which users are allowed to lock particular paths. If the hook notices a preexisting lock, it can also decide whether a user is allowed to “steal” the existing lock.</p>
+<p>If the <em>pre-lock</em> hook program returns a nonzero exit value, the lock action is aborted and anything printed to <em>stderr</em> is marshalled back to the client.</p>
+<p>The hook program may optionally dictate the lock token which will be assigned to the lock by printing the desired lock token to standard output. Because of this, implementations of this hook should carefully avoid unexpected output sent to standard output.</p>
+<blockquote>
+<p><strong>Warning</strong></p>
+<p>If the pre-lock script takes advantage of lock token dictation feature, the responsibility of generating a unique lock token falls to the script itself. Failure to generate unique lock tokens may result in undefined—and very likely, undesired—behavior.</p>
+</blockquote>
+<h4 id="Input_parameter(s)-4">Input parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ol>
+<li>Repository path</li>
+<li>Versioned path that is to be locked</li>
+<li>Authenticated username of the person attempting the lock</li>
+<li>Comment provided when the lock was created</li>
+<li><em>1</em> if the user is attempting to steal an existing lock; <em>0</em> otherwise</li>
+</ol>
+<h4 id="Common_uses-5">Common uses</h4><p>Access control</p>
+<h3 id="post-lock"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/post-lock/" target="_blank" rel="external">post-lock</a></h3><p>post-lock — Notification of a successful path lock.</p>
+<h4 id="Description-6">Description</h4><p>The <em>post-lock</em> hook runs after one or more paths have been locked. It is typically used to send email notification of the lock event.</p>
+<p>If the <em>post-lock</em> hook returns a nonzero exit status, the lock will not be aborted since it has already completed. However, anything that the hook printed to <em>stderr</em> will be marshalled back to the client, making it easier to diagnose hook failures.</p>
+<h4 id="Input_parameter(s)-5">Input parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ol>
+<li>Repository path</li>
+<li>Authenticated username of the person who locked the paths</li>
+</ol>
+<p>Additionally, the list of paths locked is passed to the hook program via standard input, one path per line.</p>
+<h4 id="Common_uses-6">Common uses</h4><p>Lock notification</p>
+<h3 id="pre-unlock"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/pre-unlock/" target="_blank" rel="external">pre-unlock</a></h3><p>pre-unlock — Notification of a path unlock attempt.</p>
+<h4 id="Description-7">Description</h4><p>The <em>pre-unlock</em> hook runs whenever someone attempts to remove a lock on a file. It can be used to create policies that specify which users are allowed to unlock particular paths. It’s particularly important for determining policies about lock breakage. If user A locks a file, is user B allowed to break the lock? What if the lock is more than a week old? These sorts of things can be decided and enforced by the hook.</p>
+<p>If the <em>pre-unlock</em> hook program returns a nonzero exit value, the unlock action is aborted and anything printed to stderr is marshalled back to the client.</p>
+<h4 id="Input_parameter(s)-6">Input parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ol>
+<li>Repository path</li>
+<li>Versioned path which is to be unlocked</li>
+<li>Authenticated username of the person attempting the unlock</li>
+<li>Lock token associated with the lock which is to be removed</li>
+<li><em>1</em> if the user is attempting to break the lock; <em>0</em> otherwise</li>
+</ol>
+<h4 id="Common_uses-7">Common uses</h4><p>Access control</p>
+<h3 id="post-unlock"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/post-unlock/" target="_blank" rel="external">post-unlock</a></h3><p>post-unlock — Notification of a successful path unlock.</p>
+<h4 id="Description-8">Description</h4><p>The <em>post-unlock</em> hook runs after one or more paths have been unlocked. It is typically used to send email notification of the unlock event.</p>
+<p>If the <em>post-unlock</em> hook returns a nonzero exit status, the unlock will not be aborted since it has already completed. However, anything that the hook printed to stderr will be marshalled back to the client, making it easier to diagnose hook failures.</p>
+<h4 id="Input_parameter(s)-7">Input parameter(s)</h4><p>The command-line arguments passed to the hook program, in order, are:</p>
+<ol>
+<li>Repository path</li>
+<li>Authenticated username of the person who unlocked the paths</li>
+</ol>
+<p>Additionally, the list of paths unlocked is passed to the hook program via standard input, one path per line.</p>
+<h4 id="Common_uses-8">Common uses</h4><p>Unlock notification</p>
+<h2 id="Hook:No_Access_to_Delete">Hook:No Access to Delete</h2><h3 id="Code">Code</h3><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">echo</span> on</span><br><span class="line"><span class="keyword">set</span> local</span><br><span class="line"><span class="keyword">set</span> REPOS=%<span class="number">1</span></span><br><span class="line"><span class="keyword">set</span> TXN=%<span class="number">2</span></span><br><span class="line"><span class="flow">for</span> /f <span class="envvar">%%a</span> <span class="flow">in</span> ('svnlook changed <span class="envvar">%REPOS%</span> -t "<span class="envvar">%TXN%</span>"') <span class="flow">do</span> <span class="keyword">set</span> str=<span class="envvar">%%a</span></span><br><span class="line"></span><br><span class="line"><span class="flow">if</span> "<span class="envvar">%str%</span>"=="D" <span class="flow">goto</span> ERROR_EXIT</span><br><span class="line"></span><br><span class="line"><span class="flow">if</span> <span class="flow">not</span> "<span class="envvar">%str%</span>"=="D" <span class="flow">goto</span> SUCCESS</span><br><span class="line"></span><br><span class="line">:ERROR_EXIT</span><br><span class="line"><span class="keyword">echo</span> 不允许删除操作!  <span class="number">1</span>&gt;&amp;<span class="number">2</span></span><br><span class="line"><span class="flow">exit</span> <span class="number">1</span></span><br><span class="line">  </span><br><span class="line">:SUCCESS</span><br><span class="line"><span class="flow">exit</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h3 id="Configuration">Configuration</h3><p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/SVN/VisualSVN-Server-Hook-No-Delete.png" alt="Hook:No Access to Delete" title="Hook:No Access to Delete"></p>
+
+        
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/SVN/">
+                #SVN
+              </a>
+            
+              <a href="/tags/VisualSVN-Server/">
+                #VisualSVN Server
+              </a>
+            
+          </div>
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2015/03/12/Build-your-blog-with-Hexo/">Build your blog with Hexo</a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </div>
+    
+  </div>
+
+
+
+  
+    <div class="comments" id="comments">
+      
+        <div class="ds-thread" data-thread-key="2015/03/19/VisualSVN-Server-Hook-No-Delete/"
+             data-title="VisualSVN Server Hook: No Delete" data-url="http://yoursite.com/2015/03/19/VisualSVN-Server-Hook-No-Delete/">
+        </div>
+
+      
+    </div>
+  
+
+          </div>
+
+          
+        </div>
+
+        
+<div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview">
+          站点概览
+        </li>
+      </ul>
+    
+
+    <div class="site-overview">
+      <div class="site-author motion-element">
+        <img class="site-author-image" src="/images/default_avatar.png" alt="Comee" />
+        <p class="site-author-name">Comee</p>
+      </div>
+      <p class="site-description motion-element">Write blog and Stay foolish!</p>
+      <div class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <span class="site-state-item-count">4</span>
+            <span class="site-state-item-name">标签</span>
+        </div>
+        <div class="site-state-item site-state-pages">
+            <span class="site-state-item-count">2</span>
+            <span class="site-state-item-name">页面</span>
+        </div>
+      </div>
+
+      
+
+      <div class="social-info motion-element">
+        
+          
+            <span class="social-item">
+              <a href="https://github.com/comee">github</a>
+            </span>
+          
+            <span class="social-item">
+              <a href="http://www.zhihu.com/people/shao-zhu-lei-48">zhihu</a>
+            </span>
+          
+        
+      </div>
+
+    </div>
+
+    
+      <div class="post-toc sidebar-panel-active">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Subversion_Repository_Hooks"><span class="nav-number">1.</span> <span class="nav-text">Subversion Repository Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#start-commit"><span class="nav-number">1.1.</span> <span class="nav-text">start-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description"><span class="nav-number">1.1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_Parameter(s)"><span class="nav-number">1.1.2.</span> <span class="nav-text">Input Parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses"><span class="nav-number">1.1.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-commit"><span class="nav-number">1.2.</span> <span class="nav-text">pre-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)"><span class="nav-number">1.2.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-commit"><span class="nav-number">1.3.</span> <span class="nav-text">post-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-revprop-change"><span class="nav-number">1.4.</span> <span class="nav-text">pre-revprop-change</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-revprop-change"><span class="nav-number">1.5.</span> <span class="nav-text">post-revprop-change</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-3"><span class="nav-number">1.5.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-4"><span class="nav-number">1.5.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-lock"><span class="nav-number">1.6.</span> <span class="nav-text">pre-lock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-4"><span class="nav-number">1.6.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-5"><span class="nav-number">1.6.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-lock"><span class="nav-number">1.7.</span> <span class="nav-text">post-lock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-5"><span class="nav-number">1.7.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-6"><span class="nav-number">1.7.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-unlock"><span class="nav-number">1.8.</span> <span class="nav-text">pre-unlock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-7"><span class="nav-number">1.8.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-6"><span class="nav-number">1.8.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-7"><span class="nav-number">1.8.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-unlock"><span class="nav-number">1.9.</span> <span class="nav-text">post-unlock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-8"><span class="nav-number">1.9.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-7"><span class="nav-number">1.9.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-8"><span class="nav-number">1.9.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hook:No_Access_to_Delete"><span class="nav-number">2.</span> <span class="nav-text">Hook:No Access to Delete</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">2.1.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">2.2.</span> <span class="nav-text">Configuration</span></a></li></ol></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Comee</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
+</div>
+
+
+
+  <div class="cc-license">
+    <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+      <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+    </a>
+  </div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+    });
+  </script>
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      $('.post').velocity('transition.slideDownIn', {stagger: 300, drag: true});
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+    }
+
+    function getTOCMaxHeight () {
+      // TODO: Make it beautiful
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+        parseInt($sidebarInner.css('padding-top'), 10) -
+        parseInt($sidebarInner.css('padding-bottom'), 10) -
+        $('.sidebar-nav').height() -
+        parseInt($tocSelector.css('margin-top'), 10) -
+        parseInt($tocSelector.css('margin-bottom'), 10);
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+      });
+    }
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if ($('.post-toc').html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"comee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+  
+</body>
+</html>
