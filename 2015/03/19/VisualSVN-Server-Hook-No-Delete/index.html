@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="theme-next use-motion">
+<html class="theme-next use-motion theme-next-next">
 <head>
   
 
@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.3.0rc5"/>
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.1"/>
 
 
     <meta name="description" content="Write blog and Stay foolish!" />
@@ -32,22 +32,33 @@
     <div id="header" class="header">
       <div class="header-inner">
         <h1 class="site-meta">
-    <a href="/" class="brand">
-        <span class="logo">
-          <i class="icon-logo"></i>
-        </span>
-        <span class="site-title">Comee</span>
-    </a>
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Comee</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
 </h1>
 
 
   <ul id="menu" class="menu">
+     
     
       
       <li class="menu-item menu-item-home">
         <a href="/">
           <i class="menu-item-icon icon-home"></i> <br />
           首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
         </a>
       </li>
     
@@ -108,11 +119,27 @@
       
 
       <div class="post-meta">
-          <span class="post-time">
-            
-              发表于 2015-03-19
-            
-          </span>
+        <span class="post-time">
+          
+            发表于 2015-03-19
+          
+        </span>
+
+        
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/SVN/">SVN</a>
+
+                
+                
+
+              
+            </span>
+          
+        
+
         
           
             <span class="post-comments-count">
@@ -326,7 +353,7 @@
 
     
       <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
           文章目录
         </li>
         <li class="sidebar-nav-overview" data-target="site-overview">
@@ -343,42 +370,68 @@
       <p class="site-description motion-element">Write blog and Stay foolish!</p>
       <div class="site-state motion-element">
         <div class="site-state-item site-state-posts">
-          <span class="site-state-item-count">3</span>
-          <span class="site-state-item-name">日志</span>
+          <a href="/archives">
+            <span class="site-state-item-count">3</span>
+            <span class="site-state-item-name">日志</span>
+          </a>
         </div>
+
+        <div class="site-state-item site-state-categories">
+          <a href="/categories">
+            <span class="site-state-item-count">3</span>
+            <span class="site-state-item-name">分类</span>
+          </a>
+        </div>
+
         <div class="site-state-item site-state-tags">
+          <a href="/tags">
             <span class="site-state-item-count">6</span>
             <span class="site-state-item-name">标签</span>
+          </a>
         </div>
-        <div class="site-state-item site-state-pages">
-            <span class="site-state-item-count">2</span>
-            <span class="site-state-item-name">页面</span>
-        </div>
+
       </div>
 
       
 
-      <div class="social-info motion-element">
+      <div class="links-of-author motion-element">
         
           
-            <span class="social-item">
-              <a href="https://github.com/comee">github</a>
+            <span class="links-of-author-item">
+              <a href="https://github.com/comee" target="_blank">github</a>
             </span>
           
-            <span class="social-item">
-              <a href="http://www.zhihu.com/people/shao-zhu-lei-48">zhihu</a>
+            <span class="links-of-author-item">
+              <a href="http://www.zhihu.com/people/shao-zhu-lei-48" target="_blank">zhihu</a>
             </span>
           
         
       </div>
+
+      
+      
+        <div class="cc-license motion-element">
+          <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+          </a>
+        </div>
+      
 
     </div>
 
     
-      <div class="post-toc sidebar-panel-active">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Subversion_Repository_Hooks"><span class="nav-number">1.</span> <span class="nav-text">Subversion Repository Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#start-commit"><span class="nav-number">1.1.</span> <span class="nav-text">start-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description"><span class="nav-number">1.1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_Parameter(s)"><span class="nav-number">1.1.2.</span> <span class="nav-text">Input Parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses"><span class="nav-number">1.1.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-commit"><span class="nav-number">1.2.</span> <span class="nav-text">pre-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)"><span class="nav-number">1.2.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-commit"><span class="nav-number">1.3.</span> <span class="nav-text">post-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-revprop-change"><span class="nav-number">1.4.</span> <span class="nav-text">pre-revprop-change</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-revprop-change"><span class="nav-number">1.5.</span> <span class="nav-text">post-revprop-change</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-3"><span class="nav-number">1.5.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-4"><span class="nav-number">1.5.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-lock"><span class="nav-number">1.6.</span> <span class="nav-text">pre-lock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-4"><span class="nav-number">1.6.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-5"><span class="nav-number">1.6.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-lock"><span class="nav-number">1.7.</span> <span class="nav-text">post-lock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-5"><span class="nav-number">1.7.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-6"><span class="nav-number">1.7.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-unlock"><span class="nav-number">1.8.</span> <span class="nav-text">pre-unlock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-7"><span class="nav-number">1.8.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-6"><span class="nav-number">1.8.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-7"><span class="nav-number">1.8.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-unlock"><span class="nav-number">1.9.</span> <span class="nav-text">post-unlock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-8"><span class="nav-number">1.9.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-7"><span class="nav-number">1.9.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-8"><span class="nav-number">1.9.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hook:No_Access_to_Delete"><span class="nav-number">2.</span> <span class="nav-text">Hook:No Access to Delete</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">2.1.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">2.2.</span> <span class="nav-text">Configuration</span></a></li></ol></li></ol>
+      <div class="post-toc-wrap sidebar-panel-active">
+        <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <div class="post-toc">
+          
+          
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Subversion_Repository_Hooks"><span class="nav-number">1.</span> <span class="nav-text">Subversion Repository Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#start-commit"><span class="nav-number">1.1.</span> <span class="nav-text">start-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description"><span class="nav-number">1.1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_Parameter(s)"><span class="nav-number">1.1.2.</span> <span class="nav-text">Input Parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses"><span class="nav-number">1.1.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-commit"><span class="nav-number">1.2.</span> <span class="nav-text">pre-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)"><span class="nav-number">1.2.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-commit"><span class="nav-number">1.3.</span> <span class="nav-text">post-commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-revprop-change"><span class="nav-number">1.4.</span> <span class="nav-text">pre-revprop-change</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-revprop-change"><span class="nav-number">1.5.</span> <span class="nav-text">post-revprop-change</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-3"><span class="nav-number">1.5.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-4"><span class="nav-number">1.5.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-lock"><span class="nav-number">1.6.</span> <span class="nav-text">pre-lock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-4"><span class="nav-number">1.6.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-5"><span class="nav-number">1.6.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-lock"><span class="nav-number">1.7.</span> <span class="nav-text">post-lock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-5"><span class="nav-number">1.7.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-6"><span class="nav-number">1.7.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-unlock"><span class="nav-number">1.8.</span> <span class="nav-text">pre-unlock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-7"><span class="nav-number">1.8.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-6"><span class="nav-number">1.8.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-7"><span class="nav-number">1.8.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-unlock"><span class="nav-number">1.9.</span> <span class="nav-text">post-unlock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description-8"><span class="nav-number">1.9.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input_parameter(s)-7"><span class="nav-number">1.9.2.</span> <span class="nav-text">Input parameter(s)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Common_uses-8"><span class="nav-number">1.9.3.</span> <span class="nav-text">Common uses</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hook:No_Access_to_Delete"><span class="nav-number">2.</span> <span class="nav-text">Hook:No Access to Delete</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">2.1.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">2.2.</span> <span class="nav-text">Configuration</span></a></li></ol></li></ol></div>
+          
+        </div>
+        <div class="post-toc-indicator-bottom post-toc-indicator"></div>
       </div>
     
+
   </div>
 </div>
 
@@ -403,16 +456,11 @@
 </div>
 
 <div class="theme-info">
-  主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
 </div>
-
-
-
-  <div class="cc-license">
-    <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
-      <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
-    </a>
-  </div>
 
 
 
@@ -425,12 +473,31 @@
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
+  
+
+  
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-      $(".fancybox").fancybox();
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
     });
   </script>
+
 
   <script type="text/javascript">
   function hasMobileUA () {
@@ -463,8 +530,6 @@
   <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
   <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-  
-
   <script type="text/javascript" id="motion.global">
   $(document).ready(function () {
     var body = $('body');
@@ -492,6 +557,7 @@
     var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
     var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
 
+    LogoAndMenuMotion();
     sidebatToggleMotion();
     postsListMotion();
     backToTopMotion();
@@ -506,6 +572,19 @@
         sidebarContentMotion();
       })
       .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
 
 
     function backToTopMotion () {
@@ -552,7 +631,8 @@
     }
 
     function postsListMotion () {
-      $('.post').velocity('transition.slideDownIn', {stagger: 300, drag: true});
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
     }
 
     function sidebatToggleMotion () {
@@ -795,21 +875,30 @@
 
     function processTOC () {
       getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
     }
 
     function getTOCMaxHeight () {
-      // TODO: Make it beautiful
       var $sidebarInner = $('.sidebar-inner');
       var height = $('.sidebar').height() -
-        parseInt($sidebarInner.css('padding-top'), 10) -
-        parseInt($sidebarInner.css('padding-bottom'), 10) -
-        $('.sidebar-nav').height() -
-        parseInt($tocSelector.css('margin-top'), 10) -
-        parseInt($tocSelector.css('margin-bottom'), 10);
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
 
       $tocSelector.css('height', height);
 
       return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
     }
 
     $(document).on('sidebar.didShow', function () {
@@ -829,11 +918,21 @@
       element.on('mousewheel DOMMouseScroll', function (event) {
           var oe = event.originalEvent;
           var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
 
           this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
           event.preventDefault();
+
+          toggleTOCOverflowIndicators();
       });
     }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
   });
 </script>
 
@@ -874,7 +973,8 @@
       });
 
       // Expand sidebar on post detail page by default, when post has a toc.
-      if ($('.post-toc').html().trim().length > 0 && isDesktop()) {
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
         setTimeout(function () {
           $('.sidebar-toggle').trigger('click');
         }, 800);
