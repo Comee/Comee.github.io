@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="PHP,WampServer," />
 
 
 
@@ -140,6 +140,17 @@
         </span>
 
         
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/PHP/">PHP</a>
+
+              
+              
+
+            
+          </span>
+        
 
         
           
@@ -178,7 +189,7 @@
 <li>绿色：服务器在线（ mysql 和 apache 服务都处于在线状态）</li>
 </ul>
 <h2 id="配置_mysql">配置 mysql</h2><p>首先要保证 WampServer 处于开启状态。</p>
-<h3 id="修改_mysql_用户_root_的密码">修改 mysql 用户 root 的密码</h3><p>默认情况下，WampServer 中集成的 mysql 的 root用户的密码为空，直接按 <kbd>enter&lt;／kbd&gt; 键就可以登入，登入后可以进行 root 用户密码的更改。<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/PHP/wamp_mysql_menu.png" alt="WampServer_MySQL_Menu"></kbd></p>
+<h3 id="修改_mysql_用户_root_的密码">修改 mysql 用户 root 的密码</h3><p>默认情况下，WampServer 中集成的 mysql 的 root用户的密码为空，直接按 <kbd>enter</kbd> 键就可以登入，登入后可以进行 root 用户密码的更改。<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/PHP/wamp_mysql_menu.png" alt="WampServer_MySQL_Menu"></p>
 <figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;use mysql</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt;update user <span class="keyword">set</span> password=PASSWORD('my_password') where user='root';</span><br><span class="line">Query OK, <span class="number">3</span> rows affected (<span class="number">0</span>.<span class="number">01</span> sec)</span><br><span class="line">Rows matched: <span class="number">3</span>  Changed: <span class="number">3</span>  Warnings: <span class="number">0</span></span><br><span class="line">mysql&gt;flush privileges;</span><br><span class="line">Query Ok, <span class="number">0</span> rows affected (<span class="number">0</span>.<span class="number">02</span> sec)</span><br></pre></td></tr></table></figure>
 <h3 id="创建用户并授予_DBA_权限">创建用户并授予 DBA 权限</h3><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; #mysql 注释：user 为用户名，pwd 为用户密码。</span><br><span class="line">mysql&gt; grant all privileges on *.* to user@localhost identified by 'pwd';</span><br></pre></td></tr></table></figure>
 <h3 id="创建数据库并导入备份数据">创建数据库并导入备份数据</h3><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database sq_xinglintech;</span><br><span class="line">mysql&gt; use sq_xinglintech;</span><br><span class="line">mysql&gt; source D:\xinglin-tech\ sq_xinglintech_201405161143_727026.sql</span><br></pre></td></tr></table></figure>
@@ -193,6 +204,14 @@
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/"> #PHP </a>
+          
+            <a href="/tags/WampServer/"> #WampServer </a>
+          
+        </div>
       
 
       
@@ -271,14 +290,14 @@
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
