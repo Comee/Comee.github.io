@@ -1153,7 +1153,7 @@ input.menu-search-input {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e30f37;
+  background: #7a3047;
 }
 .sidebar-nav {
   margin: 0;
@@ -1592,11 +1592,7 @@ input.menu-search-input {
   .pagination .prev,
   .pagination .next,
   .pagination .page-number,
-  .pagination .space,
-.pagination .prev,
-.pagination .next,
-.pagination .page-number,
-.pagination .space {
+  .pagination .space {
     margin: 0 5px;
   }
 }
