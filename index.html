@@ -168,6 +168,100 @@
           
           
             
+              <a class="post-title-link" href="/2015/06/30/Find-the-last-space-in-Excel/">
+                在 Excel 单元格中查找最后一个空格（Space）的位置
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-30
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Excel/">Excel</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/06/30/Find-the-last-space-in-Excel/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/30/Find-the-last-space-in-Excel/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><a href="http://superuser.com/questions/680769/i-need-to-find-the-last-space-in-a-xls-cell">问题描述</a>：</p>
+<blockquote>
+<p>I have an Excel sheet with text values, e.g. in A1: “This is the text”. I need to find the position of the last space character. Is there an excel formula that will give me the result I want? I have tried <code>FIND</code> and <code>SEARCH</code>, however these start from left, what I need is to start from right.</p>
+</blockquote>
+<p>解决办法一：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=FIND(&#34;&#9731;&#34;,SUBSTITUTE(A1,&#34; &#34;,&#34;&#9731;&#34;,LEN(A1)-LEN(SUBSTITUTE(A1,&#34; &#34;,&#34;&#34;))))</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<blockquote>
+<ol>
+<li><code>LEN(A1)-LEN(SUBSTITUTE(A1,&quot; &quot;,&quot;&quot;))</code> gives you the number of spaces, let’s call it x,</li>
+<li><code>SUBSTITUTE(A1,&quot; &quot;,&quot;☃&quot;,[x])</code> will replace the xth space (so the last one) by a snowman,</li>
+<li><code>FIND(&quot;☃&quot;,[...])</code> will give you the position of the snowman. Which is the position of the last space.</li>
+</ol>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/06/30/Find-the-last-space-in-Excel/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/06/17/Learn-Vim-Progressively/">
                 逐步学习 Vim
               </a>
@@ -937,21 +1031,21 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
