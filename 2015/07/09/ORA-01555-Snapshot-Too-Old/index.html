@@ -1,0 +1,632 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+    <meta name="description" content="Write blog and Stay foolish!" />
+
+
+
+  <meta name="keywords" content="ORA-01555,Oracle," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: ''
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f3640894c52c81dfae8f7d5a7f83f3ac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> ORA-01555 问题记录 // Comee </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Comee</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              ORA-01555 问题记录
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-09
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Oracle/">Oracle</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/07/09/ORA-01555-Snapshot-Too-Old/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/09/ORA-01555-Snapshot-Too-Old/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/Oracle/undo_segment_and_consistent_read.jpg" alt="undo_segment_and_consistent_read"><br><a id="more"></a></p>
+<h2 id="产生_ORA-01555_错误">产生 ORA-01555 错误</h2><p>Oracle 在什么情况下会产生 ORA-01555 :<br><a href="http://www.dba-oracle.com/t_ora_01555_snapshot_old.htm" target="_blank" rel="external">ORA-01555 Snapshot Too Old — Oracle Tips by Burleson Consulting</a><br><a href="http://itserverlive.blog.51cto.com/970886/211916/" target="_blank" rel="external">Oracle ORA-01555快照过旧的错误</a></p>
+<h2 id="问题描述与错误日志">问题描述与错误日志</h2><blockquote>
+<p>场景还原</p>
+<p>对方系统频繁地调用我方的 webservice 方法，<br>我方将接收到的 xml 文件解析成对象，<br>然后将对象更新（Update）到 Oracle11gR2 中，<br>一次调用大概会持续 2~3 小时。数据是以持久化（单条更新）的方式存入到中间库中。</p>
+</blockquote>
+<p>错误日志（ORA-01555）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2015</span>-<span class="number">07</span>-<span class="number">07</span> <span class="number">08</span>:<span class="number">58</span>:<span class="number">38.643</span> [INFO ] FileUtil - 文件写入成功：D:\runtime\receive-xmls\<span class="number">2015</span>-<span class="number">07</span>-<span class="number">07</span>\SendInPatInfo-》<span class="number">3571335</span>（<span class="number">1</span>） <span class="number">75979646680981</span>.xml</span><br><span class="line"><span class="number">2015</span>-<span class="number">07</span>-<span class="number">07</span> <span class="number">08</span>:<span class="number">58</span>:<span class="number">41.908</span> [ERROR] Patient - <span class="number">4935430</span>(<span class="number">1</span>) 写入体温记录出错:<span class="number">2015</span>-<span class="number">06</span>-<span class="number">26</span> <span class="number">06</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line">================================================================================</span><br><span class="line">com.lansle.xdo.sql.SQLOperationException: com.lansle.sql.ESQLException: java.sql.SQLException: ORA-<span class="number">01555</span>: 快照过旧: 回退段号 <span class="number">61</span> (名称为 <span class="string">"_SYSSMU61_278601726$"</span>) 过小</span><br><span class="line"></span><br><span class="line">	at com.lansle.xdo.sql.Operator.executeUpdate(Operator.java:<span class="number">808</span>)</span><br><span class="line">	at com.lansle.xdo.sql.SQLEntity.store(SQLEntity.java:<span class="number">688</span>)</span><br><span class="line">	at com.lansle.xdo.sql.SQLEntity.store(SQLEntity.java:<span class="number">636</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.z.SQLUtil.save(SQLUtil.java:<span class="number">1028</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.z.SQLUtil.save(SQLUtil.java:<span class="number">999</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.Patient.save(Patient.java:<span class="number">527</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.DataReciever.SendInPatInfo(DataReciever.java:<span class="number">65</span>)</span><br><span class="line">	at sun.reflect.GeneratedMethodAccessor195.invoke(Unknown Source)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="number">25</span>)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:<span class="number">592</span>)</span><br><span class="line">	at org.apache.axis2.rpc.receivers.RPCUtil.invokeServiceClass(RPCUtil.java:<span class="number">212</span>)</span><br><span class="line">	at org.apache.axis2.rpc.receivers.RPCMessageReceiver.invokeBusinessLogic(RPCMessageReceiver.java:<span class="number">117</span>)</span><br><span class="line">	at org.apache.axis2.receivers.AbstractInOutMessageReceiver.invokeBusinessLogic(AbstractInOutMessageReceiver.java:<span class="number">40</span>)</span><br><span class="line">	at org.apache.axis2.receivers.AbstractMessageReceiver.receive(AbstractMessageReceiver.java:<span class="number">114</span>)</span><br><span class="line">	at org.apache.axis2.engine.AxisEngine.receive(AxisEngine.java:<span class="number">181</span>)</span><br><span class="line">	at org.apache.axis2.transport.http.HTTPTransportUtils.processHTTPPostRequest(HTTPTransportUtils.java:<span class="number">172</span>)</span><br><span class="line">	at org.apache.axis2.transport.http.AxisServlet.doPost(AxisServlet.java:<span class="number">146</span>)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:<span class="number">637</span>)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:<span class="number">717</span>)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:<span class="number">290</span>)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:<span class="number">206</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:<span class="number">233</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:<span class="number">191</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:<span class="number">127</span>)</span><br><span class="line">	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:<span class="number">102</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:<span class="number">109</span>)</span><br><span class="line">	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:<span class="number">298</span>)</span><br><span class="line">	at org.apache.coyote.http11.Http11AprProcessor.process(Http11AprProcessor.java:<span class="number">861</span>)</span><br><span class="line">	at org.apache.coyote.http11.Http11AprProtocol$Http11ConnectionHandler.process(Http11AprProtocol.java:<span class="number">579</span>)</span><br><span class="line">	at org.apache.tomcat.util.net.AprEndpoint$Worker.run(AprEndpoint.java:<span class="number">1584</span>)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:<span class="number">595</span>)</span><br><span class="line">[   Time   ] <span class="number">2015</span>-<span class="number">07</span>-<span class="number">07</span> <span class="number">08</span>:<span class="number">58</span>:<span class="number">41.908</span></span><br><span class="line">[Attributes] </span><br><span class="line"></span><br><span class="line">	+------+---------------+</span><br><span class="line">	| bean | $&#123;see follow&#125; |</span><br><span class="line">	+------+---------------+</span><br><span class="line"></span><br><span class="line">	+---------------------+---------------------+-----------------------------------------------------+</span><br><span class="line">	| bean                | $&#123;see follow&#125;       | com.xinglintech.nis.dhadapter.entities.Temperatures |</span><br><span class="line">	+---------------------+---------------------+-----------------------------------------------------+</span><br><span class="line">	| bean.lastmodifytime | <span class="number">2015</span>-<span class="number">07</span>-<span class="number">07</span> <span class="number">02</span>:<span class="number">40</span>:<span class="number">34</span> | java.lang.String                                    |</span><br><span class="line">	+---------------------+---------------------+-----------------------------------------------------+</span><br><span class="line">	| bean.patientid      | <span class="number">4935430</span>             | java.lang.String                                    |</span><br><span class="line">	+---------------------+---------------------+-----------------------------------------------------+</span><br><span class="line">	| bean.recodedate     | <span class="number">2015</span>-<span class="number">06</span>-<span class="number">26</span> <span class="number">06</span>:<span class="number">00</span>:<span class="number">00</span> | java.lang.String                                    |</span><br><span class="line">	+---------------------+---------------------+-----------------------------------------------------+</span><br><span class="line">	| bean.value          | <span class="number">36.4</span>                | <span class="keyword">double</span>                                              |</span><br><span class="line">	+---------------------+---------------------+-----------------------------------------------------+</span><br><span class="line">	| bean.visitid        | <span class="number">1</span>                   | java.lang.String                                    |</span><br><span class="line">	+---------------------+---------------------+-----------------------------------------------------+</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Caused by:</span><br><span class="line">com.lansle.sql.ESQLException: java.sql.SQLException: ORA-<span class="number">01555</span>: 快照过旧: 回退段号 <span class="number">61</span> (名称为 <span class="string">"_SYSSMU61_278601726$"</span>) 过小</span><br><span class="line"></span><br><span class="line">	at com.lansle.sql.SQLUpdate.executeUpdate(SQLUpdate.java:<span class="number">821</span>)</span><br><span class="line">	at com.lansle.sql.SQLBase.executeUpdate(SQLBase.java:<span class="number">353</span>)</span><br><span class="line">	at com.lansle.xdo.sql.Operator.executeUpdate(Operator.java:<span class="number">800</span>)</span><br><span class="line">	at com.lansle.xdo.sql.SQLEntity.store(SQLEntity.java:<span class="number">688</span>)</span><br><span class="line">	at com.lansle.xdo.sql.SQLEntity.store(SQLEntity.java:<span class="number">636</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.z.SQLUtil.save(SQLUtil.java:<span class="number">1028</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.z.SQLUtil.save(SQLUtil.java:<span class="number">999</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.Patient.save(Patient.java:<span class="number">527</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.DataReciever.SendInPatInfo(DataReciever.java:<span class="number">65</span>)</span><br><span class="line">	at sun.reflect.GeneratedMethodAccessor195.invoke(Unknown Source)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="number">25</span>)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:<span class="number">592</span>)</span><br><span class="line">	at org.apache.axis2.rpc.receivers.RPCUtil.invokeServiceClass(RPCUtil.java:<span class="number">212</span>)</span><br><span class="line">	at org.apache.axis2.rpc.receivers.RPCMessageReceiver.invokeBusinessLogic(RPCMessageReceiver.java:<span class="number">117</span>)</span><br><span class="line">	at org.apache.axis2.receivers.AbstractInOutMessageReceiver.invokeBusinessLogic(AbstractInOutMessageReceiver.java:<span class="number">40</span>)</span><br><span class="line">	at org.apache.axis2.receivers.AbstractMessageReceiver.receive(AbstractMessageReceiver.java:<span class="number">114</span>)</span><br><span class="line">	at org.apache.axis2.engine.AxisEngine.receive(AxisEngine.java:<span class="number">181</span>)</span><br><span class="line">	at org.apache.axis2.transport.http.HTTPTransportUtils.processHTTPPostRequest(HTTPTransportUtils.java:<span class="number">172</span>)</span><br><span class="line">	at org.apache.axis2.transport.http.AxisServlet.doPost(AxisServlet.java:<span class="number">146</span>)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:<span class="number">637</span>)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:<span class="number">717</span>)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:<span class="number">290</span>)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:<span class="number">206</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:<span class="number">233</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:<span class="number">191</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:<span class="number">127</span>)</span><br><span class="line">	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:<span class="number">102</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:<span class="number">109</span>)</span><br><span class="line">	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:<span class="number">298</span>)</span><br><span class="line">	at org.apache.coyote.http11.Http11AprProcessor.process(Http11AprProcessor.java:<span class="number">861</span>)</span><br><span class="line">	at org.apache.coyote.http11.Http11AprProtocol$Http11ConnectionHandler.process(Http11AprProtocol.java:<span class="number">579</span>)</span><br><span class="line">	at org.apache.tomcat.util.net.AprEndpoint$Worker.run(AprEndpoint.java:<span class="number">1584</span>)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:<span class="number">595</span>)</span><br><span class="line">[   Time   ] <span class="number">2015</span>-<span class="number">07</span>-<span class="number">07</span> <span class="number">08</span>:<span class="number">58</span>:<span class="number">41.908</span></span><br><span class="line">[Attributes] </span><br><span class="line"></span><br><span class="line">	+-----+----------------------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">	| sql | update TEMPERATURES set PATIENTID = ?, VISITID = ?, RECODEDATE = ?, VALUE = ?, LASTMODIFYTIME = ? where PATIENTID = ? and VISITID = ? and RECODEDATE = ? |</span><br><span class="line">	+-----+----------------------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Caused by:</span><br><span class="line">java.sql.SQLException: ORA-<span class="number">01555</span>: 快照过旧: 回退段号 <span class="number">61</span> (名称为 <span class="string">"_SYSSMU61_278601726$"</span>) 过小</span><br><span class="line"></span><br><span class="line">	at oracle.jdbc.dbaccess.DBError.throwSqlException(DBError.java:<span class="number">180</span>)</span><br><span class="line">	at oracle.jdbc.ttc7.TTIoer.processError(TTIoer.java:<span class="number">208</span>)</span><br><span class="line">	at oracle.jdbc.ttc7.Oall7.receive(Oall7.java:<span class="number">543</span>)</span><br><span class="line">	at oracle.jdbc.ttc7.TTC7Protocol.doOall7(TTC7Protocol.java:<span class="number">1451</span>)</span><br><span class="line">	at oracle.jdbc.ttc7.TTC7Protocol.parseExecuteFetch(TTC7Protocol.java:<span class="number">862</span>)</span><br><span class="line">	at oracle.jdbc.driver.OracleStatement.executeNonQuery(OracleStatement.java:<span class="number">1846</span>)</span><br><span class="line">	at oracle.jdbc.driver.OracleStatement.doExecuteOther(OracleStatement.java:<span class="number">1771</span>)</span><br><span class="line">	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:<span class="number">2361</span>)</span><br><span class="line">	at oracle.jdbc.driver.OraclePreparedStatement.executeUpdate(OraclePreparedStatement.java:<span class="number">422</span>)</span><br><span class="line">	at com.lansle.sql.SQLUpdate.executeUpdate(SQLUpdate.java:<span class="number">813</span>)</span><br><span class="line">	at com.lansle.sql.SQLBase.executeUpdate(SQLBase.java:<span class="number">353</span>)</span><br><span class="line">	at com.lansle.xdo.sql.Operator.executeUpdate(Operator.java:<span class="number">800</span>)</span><br><span class="line">	at com.lansle.xdo.sql.SQLEntity.store(SQLEntity.java:<span class="number">688</span>)</span><br><span class="line">	at com.lansle.xdo.sql.SQLEntity.store(SQLEntity.java:<span class="number">636</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.z.SQLUtil.save(SQLUtil.java:<span class="number">1028</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.z.SQLUtil.save(SQLUtil.java:<span class="number">999</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.Patient.save(Patient.java:<span class="number">527</span>)</span><br><span class="line">	at com.xinglintech.nis.dhadapter.DataReciever.SendInPatInfo(DataReciever.java:<span class="number">65</span>)</span><br><span class="line">	at sun.reflect.GeneratedMethodAccessor195.invoke(Unknown Source)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="number">25</span>)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:<span class="number">592</span>)</span><br><span class="line">	at org.apache.axis2.rpc.receivers.RPCUtil.invokeServiceClass(RPCUtil.java:<span class="number">212</span>)</span><br><span class="line">	at org.apache.axis2.rpc.receivers.RPCMessageReceiver.invokeBusinessLogic(RPCMessageReceiver.java:<span class="number">117</span>)</span><br><span class="line">	at org.apache.axis2.receivers.AbstractInOutMessageReceiver.invokeBusinessLogic(AbstractInOutMessageReceiver.java:<span class="number">40</span>)</span><br><span class="line">	at org.apache.axis2.receivers.AbstractMessageReceiver.receive(AbstractMessageReceiver.java:<span class="number">114</span>)</span><br><span class="line">	at org.apache.axis2.engine.AxisEngine.receive(AxisEngine.java:<span class="number">181</span>)</span><br><span class="line">	at org.apache.axis2.transport.http.HTTPTransportUtils.processHTTPPostRequest(HTTPTransportUtils.java:<span class="number">172</span>)</span><br><span class="line">	at org.apache.axis2.transport.http.AxisServlet.doPost(AxisServlet.java:<span class="number">146</span>)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:<span class="number">637</span>)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:<span class="number">717</span>)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:<span class="number">290</span>)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:<span class="number">206</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:<span class="number">233</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:<span class="number">191</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:<span class="number">127</span>)</span><br><span class="line">	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:<span class="number">102</span>)</span><br><span class="line">	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:<span class="number">109</span>)</span><br><span class="line">	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:<span class="number">298</span>)</span><br><span class="line">	at org.apache.coyote.http11.Http11AprProcessor.process(Http11AprProcessor.java:<span class="number">861</span>)</span><br><span class="line">	at org.apache.coyote.http11.Http11AprProtocol$Http11ConnectionHandler.process(Http11AprProtocol.java:<span class="number">579</span>)</span><br><span class="line">	at org.apache.tomcat.util.net.AprEndpoint$Worker.run(AprEndpoint.java:<span class="number">1584</span>)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:<span class="number">595</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">================================================================================</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">2015</span>-<span class="number">07</span>-<span class="number">07</span> <span class="number">08</span>:<span class="number">59</span>:<span class="number">09.378</span> [INFO ] FileUtil - 开始写入文件：D:\runtime\receive-xmls\<span class="number">2015</span>-<span class="number">07</span>-<span class="number">07</span>\SendInPatInfo-》<span class="number">3571710</span>（<span class="number">1</span>） <span class="number">76010384605013</span>.xml</span><br></pre></td></tr></table></figure>
+<h2 id="解决方案">解决方案</h2><h3 id="查看_alert_日志文件（XML与TXT）">查看 alert 日志文件（XML与TXT）</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select value from v$diag_info where name ='Diag Alert';</span><br><span class="line">SQL&gt; select value from v$diag_info where name ='Diag Trace';</span><br></pre></td></tr></table></figure>
+<h3 id="查看_undo_tablespace">查看 undo tablespace</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Admin&gt;sqlplus</span><br><span class="line"></span><br><span class="line">SQL*Plus: Release 11.2.0.2.0 Production on 星期三 7月 8 10:57:22 2015</span><br><span class="line"></span><br><span class="line">Copyright (c) 1982, 2010, Oracle.  All rights reserved.</span><br><span class="line"></span><br><span class="line">请输入用户名:  </span><br><span class="line">输入口令: </span><br><span class="line"></span><br><span class="line">连接到: </span><br><span class="line">Oracle Database 11g Enterprise Edition Release 11.2.0.2.0 - 64bit Production</span><br><span class="line">With the Partitioning, OLAP, Data Mining and Real Application Testing options</span><br><span class="line"></span><br><span class="line">SQL&gt; show parameter undo</span><br><span class="line"></span><br><span class="line">NAME                                 TYPE        VALUE</span><br><span class="line">------------------------------------ ----------- ------------------------------</span><br><span class="line">undo_management                      string      AUTO</span><br><span class="line">undo_retention                       integer     900</span><br><span class="line">undo_tablespace                      string      UNDOTBS1</span><br></pre></td></tr></table></figure>
+<h3 id="查看_maxquerylen_最大值">查看 maxquerylen 最大值</h3><p>可以通过v$undostat视图的maxquerylen列查询在过去的一段时间内，最长的查询执行的时间（以秒为单位）。UNDO_RETENTION参数中的时间设置应该至少与maxquerylen列中给出的时间一样长。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select max(maxquerylen) from v$undostat</span><br></pre></td></tr></table></figure>
+<h3 id="根据_maxquerylen_设置_UNDO_RETENTION">根据 maxquerylen 设置 UNDO_RETENTION</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--设置保留时间为30分钟（1800秒）</span><br><span class="line">SQL&gt; ALTER SYSTEM SET UNDO_RETENTION = 1800;</span><br></pre></td></tr></table></figure>
+<p>UNDO_RETENTION 参数的较高值并不保证撤销数据保留 UNDO_RETENTION 参数指定的时间。为保证撤销保留指定的时间，可以使用RETENTION GRARANTEE子句。</p>
+<blockquote>
+<p>Retention Guarantee</p>
+<p>To guarantee the success of long-running queries or Oracle Flashback operations,<br>you can enable retention guarantee. If retention guarantee is enabled,<br>the specified minimum undo retention is guaranteed;<br>the database never overwrites unexpired undo data even if it means that transactions fail due to lack of space in the undo tablespace.<br>If retention guarantee is not enabled,<br>the database can overwrite unexpired undo when space is low,<br>thus lowering the undo retention for the system. This option is disabled by default.</p>
+<p><strong>WARNING:</strong><br><strong>Enabling retention guarantee can cause multiple DML operations to fail. Use with caution.</strong></p>
+<p>You enable retention guarantee by specifying the RETENTION GUARANTEE clause for the undo tablespace when you create it with either the CREATE DATABASE or CREATE UNDO TABLESPACE statement.<br>Or, you can later specify this clause in an ALTER TABLESPACE statement.<br>You disable retention guarantee with the RETENTION NOGUARANTEE clause.</p>
+<p>You can use the DBA_TABLESPACES view to determine the retention guarantee setting for the undo tablespace.<br>A column named RETENTION contains a value of GUARANTEE, NOGUARANTEE, or NOT APPLY (used for tablespaces other than the undo tablespace).</p>
+</blockquote>
+<p>说明：</p>
+<blockquote>
+<p>假如数据库中用RETENTION GUARANTEE子句配置了保证保留撤销。如果撤销表空间太小不能满足使用它的所有活动事务，那么会发生以下情况：<br>如果撤销表空间用完85％，Oracle将发布一个自动表空间警告<br>当撤销表空间用完97％时，Oracle将发布一个自动表空间严重警告<br>所有DML语句将不允许，并且会接收到一个空间超出错误<br>DDL语句允许继续执行</p>
+</blockquote>
+<h2 id="参考文献">参考文献</h2><ul>
+<li><a href="http://www.dba-oracle.com/t_ora_01555_snapshot_old.htm" target="_blank" rel="external">ORA-01555 Snapshot Too Old — Oracle Tips by Burleson Consulting</a></li>
+<li><a href="http://docs.oracle.com/cd/B19306_01/server.102/b14231/undo.htm" target="_blank" rel="external">Managing the Undo Tablespace</a></li>
+<li><a href="http://gaoshan.blog.51cto.com/742525/336611" target="_blank" rel="external">ORA-01555错误的一次处理记录</a></li>
+<li><a href="http://itserverlive.blog.51cto.com/970886/211916/" target="_blank" rel="external">Oracle ORA-01555快照过旧的错误</a></li>
+<li><a href="http://blog.csdn.net/seagal890/article/details/3044226" target="_blank" rel="external">深度理解Oracle10g中UNDO_RETENTION参数的使用</a></li>
+<li><a href="http://www.akadia.com/services/ora_optimize_undo.html" target="_blank" rel="external">Optimize Oracle UNDO Parameters</a></li>
+<li><a href="http://blog.csdn.net/huashnag/article/details/8480937" target="_blank" rel="external">oracle redo 回滚段 详解</a></li>
+</ul>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ORA-01555/"> #ORA-01555 </a>
+          
+            <a href="/tags/Oracle/"> #Oracle </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/04/Excel-VBA-ExtractTheLastSuccessiveNumbers/">Excel VBA: 提取最后一连串数字</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/07/09/ORA-01555-Snapshot-Too-Old/"
+               data-title="ORA-01555 问题记录" data-url="http://yoursite.com/2015/07/09/ORA-01555-Snapshot-Too-Old/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.png" alt="Comee" />
+          <p class="site-author-name">Comee</p>
+        </div>
+        <p class="site-description motion-element">Write blog and Stay foolish!</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/comee" target="_blank">github</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.zhihu.com/people/shao-zhu-lei-48" target="_blank">zhihu</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#产生_ORA-01555_错误"><span class="nav-number">1.</span> <span class="nav-text">产生 ORA-01555 错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述与错误日志"><span class="nav-number">2.</span> <span class="nav-text">问题描述与错误日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看_alert_日志文件（XML与TXT）"><span class="nav-number">3.1.</span> <span class="nav-text">查看 alert 日志文件（XML与TXT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看_undo_tablespace"><span class="nav-number">3.2.</span> <span class="nav-text">查看 undo tablespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看_maxquerylen_最大值"><span class="nav-number">3.3.</span> <span class="nav-text">查看 maxquerylen 最大值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据_maxquerylen_设置_UNDO_RETENTION"><span class="nav-number">3.4.</span> <span class="nav-text">根据 maxquerylen 设置 UNDO_RETENTION</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Comee</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"comee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+
+</body>
+</html>
