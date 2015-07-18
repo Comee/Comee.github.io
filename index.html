@@ -168,6 +168,161 @@
           
           
             
+              <a class="post-title-link" href="/2015/07/18/Get-Administrator-Privileges-to-Run-Batch-File-Automatically/">
+                自动获得管理员权限来运行 Batch 脚本
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-18
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Batch/">Batch</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/07/18/Get-Administrator-Privileges-to-Run-Batch-File-Automatically/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/18/Get-Administrator-Privileges-to-Run-Batch-File-Automatically/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>自动获得管理员权限来运行 Batch 脚本，<code>:main</code> 以下输入要运行的脚本。</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">pushd</span> "<span class="envvar">%CD%</span>"</span><br><span class="line"><span class="built_in">CD</span> /D "%~dp0"</span><br><span class="line"></span><br><span class="line"><span class="built_in">cls</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">::管理员账户</span><br><span class="line">:: whoami /user |<span class="built_in">find</span> "-<span class="number">500</span>" &gt;<span class="stream">nul</span> <span class="number">2</span>&gt;<span class="stream">nul</span></span><br><span class="line">::<span class="flow">if</span> <span class="flow">not</span> <span class="flow">errorlevel</span> <span class="number">1</span> (<span class="flow">goto</span> AdministratorAccount) <span class="flow">else</span> <span class="flow">goto</span> OtherAccount</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">::管理员权限运行</span><br><span class="line"><span class="keyword">set</span> TempFile_Name=<span class="envvar">%SystemRoot%</span>\System32\BatTestUACin_SysRt<span class="envvar">%Random%</span>.batemp</span><br><span class="line"><span class="keyword">echo</span> <span class="envvar">%TempFile_Name%</span> <span class="number">1</span>&gt;<span class="stream">nul</span></span><br><span class="line"></span><br><span class="line">( <span class="keyword">echo</span> "BAT Test UAC <span class="flow">in</span> Temp" &gt;<span class="envvar">%TempFile_Name%</span> ) <span class="number">1</span>&gt;<span class="stream">nul</span> <span class="number">2</span>&gt;<span class="stream">nul</span></span><br><span class="line"></span><br><span class="line"> <span class="flow">if</span> <span class="flow">exist</span> <span class="envvar">%TempFile_Name%</span> (</span><br><span class="line"> <span class="keyword">echo</span> use administrator privilege</span><br><span class="line"> <span class="winutils">del</span> /f /q <span class="envvar">%TempFile_Name%</span> </span><br><span class="line"> <span class="flow">goto</span> main</span><br><span class="line">) <span class="flow">else</span> (</span><br><span class="line"> <span class="keyword">echo</span> <span class="flow">not</span> use administrator privilege</span><br><span class="line"> <span class="flow">goto</span> OtherAccount</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:OtherAccount</span><br><span class="line">%<span class="number">1</span> %<span class="number">2</span></span><br><span class="line"><span class="built_in">ver</span>|<span class="built_in">find</span> "<span class="number">5</span>."&gt;<span class="stream">nul</span>&amp;&amp;<span class="flow">goto</span> :st</span><br><span class="line">mshta vbscript:createobject("shell.application").shellexecute("%~s0","<span class="flow">goto</span> :st","","runas",<span class="number">1</span>)(window.close)&amp;<span class="flow">goto</span> :eof</span><br><span class="line"></span><br><span class="line">:st</span><br><span class="line"><span class="keyword">copy</span> "%~<span class="number">0</span>" "<span class="envvar">%windir%</span>\system32\"</span><br><span class="line"><span class="flow">goto</span> :main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:main</span><br><span class="line"></span><br><span class="line">:: Code Go Here!</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015/07/18/Kill-Process-By-Port-Number/">
+                根据端口号来杀死进程
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-18
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Batch/">Batch</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/07/18/Kill-Process-By-Port-Number/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/18/Kill-Process-By-Port-Number/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>根据端口号获得进程的 pid，然后 <code>taskkill</code> 命令杀死进程。</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">echo</span> off</span><br><span class="line">:wait_a_port</span><br><span class="line"><span class="keyword">set</span> port=</span><br><span class="line"><span class="keyword">echo</span>.&amp;<span class="keyword">set</span> /p port=Please input port number:</span><br><span class="line"><span class="built_in">cls</span></span><br><span class="line"><span class="flow">if</span> <span class="flow">not</span> <span class="flow">defined</span> port <span class="flow">goto</span> :wait_a_port</span><br><span class="line"></span><br><span class="line"><span class="flow">for</span> /f "tokens=<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>" <span class="envvar">%%a</span> <span class="flow">in</span> ('netstat -ano^|<span class="built_in">find</span> /i ":<span class="envvar">%port%</span> "') <span class="flow">do</span> <span class="flow">if</span> <span class="flow">not</span> "<span class="envvar">%%c</span>"=="" (<span class="keyword">set</span> pid=<span class="envvar">%%c</span>) <span class="flow">else</span> (<span class="keyword">set</span> pid=<span class="envvar">%%b</span>)</span><br><span class="line"><span class="flow">for</span> /f "tokens=<span class="number">1</span>" <span class="envvar">%%a</span> <span class="flow">in</span> ('tasklist /fi "pid eq <span class="envvar">%pid%</span>"') <span class="flow">do</span> <span class="keyword">set</span> prog=<span class="envvar">%%a</span></span><br><span class="line"><span class="keyword">echo</span> Port Number：<span class="envvar">%port%</span></span><br><span class="line"><span class="keyword">echo</span> PID：<span class="envvar">%pid%</span></span><br><span class="line"><span class="keyword">echo</span> Process：<span class="envvar">%prog%</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> n=</span><br><span class="line"><span class="keyword">echo</span>.&amp;<span class="keyword">set</span> /p n=Please input pid to kill it:</span><br><span class="line"></span><br><span class="line"><span class="flow">if</span> <span class="flow">defined</span> n (<span class="keyword">echo</span>.&amp;<span class="winutils">taskkill</span> /f /fi "pid eq <span class="envvar">%pid%</span>")</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span>.&amp;<span class="keyword">echo</span> Press to <span class="flow">exit</span> ...</span><br><span class="line"><span class="built_in">pause</span>&gt;<span class="stream">nul</span></span><br><span class="line"><span class="flow">exit</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/07/09/ORA-01555-Snapshot-Too-Old/">
                 ORA-01555 问题记录
               </a>
@@ -819,174 +974,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/14/Javadoc-Documentation-Comments/">
-                Javadoc:Documentation Comments
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-04-14
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Java/">Java</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/04/14/Javadoc-Documentation-Comments/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/14/Javadoc-Documentation-Comments/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/Java/code_train.png" alt="Code_Train"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/14/Javadoc-Documentation-Comments/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/03/21/SSD-OCZ-RevoDrive3-X2-240G-Performance-Test/">
-                SSD:OCZ RevoDrive3 X2 240G Performance Test
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-03-21
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/SSD/">SSD</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/21/SSD-OCZ-RevoDrive3-X2-240G-Performance-Test/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/21/SSD-OCZ-RevoDrive3-X2-240G-Performance-Test/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>主要内容：</p>
-<ul>
-<li>HDD RAID 5 Performance vs Single HDD Performance</li>
-<li>SSD Performance vs HDD Performance</li>
-<li>SSD Performance: PCI-Express SSD vs SATA III SSD</li>
-<li>RAID 5 Performance: Software based vs Hardware based</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/21/SSD-OCZ-RevoDrive3-X2-240G-Performance-Test/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1025,21 +1012,21 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

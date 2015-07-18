@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="Excel," />
+  <meta name="keywords" content="Batch," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> 在 Excel 单元格中查找最后一个空格（Space）的位置 // Comee </title>
+  <title> 自动获得管理员权限来运行 Batch 脚本 // Comee </title>
 </head>
 
 <body>
@@ -166,7 +166,7 @@
           
           
             
-              在 Excel 单元格中查找最后一个空格（Space）的位置
+              自动获得管理员权限来运行 Batch 脚本
             
           
         </h1>
@@ -174,14 +174,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-06-30
+          发表于 2015-07-18
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/Excel/">Excel</a>
+              <a href="/categories/Batch/">Batch</a>
 
               
               
@@ -194,8 +194,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/06/30/Find-the-last-space-in-Excel/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/30/Find-the-last-space-in-Excel/"></span>
+            <a href="/2015/07/18/Get-Administrator-Privileges-to-Run-Batch-File-Automatically/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/18/Get-Administrator-Privileges-to-Run-Batch-File-Automatically/"></span>
             </a>
           </span>
           
@@ -209,43 +209,8 @@
       
 
       
-        <p><a href="http://superuser.com/questions/680769/i-need-to-find-the-last-space-in-a-xls-cell" target="_blank" rel="external">问题描述</a>：</p>
-<blockquote>
-<p>I have an Excel sheet with text values, e.g. in A1: “This is the text”. I need to find the position of the last space character. Is there an excel formula that will give me the result I want? I have tried <code>FIND</code> and <code>SEARCH</code>, however these start from left, what I need is to start from right.</p>
-</blockquote>
-<p>解决办法一：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=FIND(&#34;&#9731;&#34;,SUBSTITUTE(A1,&#34; &#34;,&#34;&#9731;&#34;,LEN(A1)-LEN(SUBSTITUTE(A1,&#34; &#34;,&#34;&#34;))))</span><br></pre></td></tr></table></figure>
-<p>说明：</p>
-<blockquote>
-<ol>
-<li><code>LEN(A1)-LEN(SUBSTITUTE(A1,&quot; &quot;,&quot;&quot;))</code> gives you the number of spaces, let’s call it x,</li>
-<li><code>SUBSTITUTE(A1,&quot; &quot;,&quot;☃&quot;,[x])</code> will replace the xth space (so the last one) by a snowman,</li>
-<li><code>FIND(&quot;☃&quot;,[...])</code> will give you the position of the snowman. Which is the position of the last space.</li>
-</ol>
-</blockquote>
-<a id="more"></a>
-<p>解决办法二：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// Here&#39;s another way, any characters are allowed in A1 (even snowmen!)&#10;=LOOKUP(2^15,FIND(&#34; &#34;,A1,ROW(INDIRECT(&#34;1:&#34;&#38;LEN(A1)))))</span><br></pre></td></tr></table></figure>
-<p>In Excel 2010 or later you could also use <code>AGGREGATE</code> function like this:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=AGGREGATE(14,6,FIND(&#34; &#34;,A1,ROW(INDIRECT(&#34;1:&#34;&#38;LEN(A1)))),1)</span><br></pre></td></tr></table></figure>
-<p>说明：</p>
-<blockquote>
-<ol>
-<li><p><code>FIND</code> has a third argument that defines the start position of the search, if you apply an array of integer values 1 to n (where n is the length of A1) to that parameter you get an array back with the last number being the position of the last space.</p>
-</li>
-<li><p><code>LOOKUP</code> then extracts that number by searching for a value greater than any value that might be found in that array, in which case the last number is found.</p>
-</li>
-<li><p><code>FIND</code> returns the same array as before and by using 14 as 1st argument of AGGREGATE and 1 as the last you get the largest value in the array, whilst ignoring errors [6].</p>
-</li>
-<li><p><code>INDIRECT</code> works -&gt; </p>
-</li>
-</ol>
-<blockquote>
-<p>Assuming A1 has 12 characters then this part <code>&quot;1:&quot;&amp;LEN(A1)</code> evaluates to <code>&quot;1:12&quot;</code> that’s a string which <code>ROW</code> can’t process but <code>INDIRECT</code> converts a string to a valid reference which <code>ROW</code> can handle, so <code>ROW(1:12)</code> then gives you <br> <code>{1;2;3;4;5;6;7;8;9;10;11;12}</code>; </p>
-<p><code>FIND</code> returns an array, e.g if A1 contains <code>barry larry houdini</code> then <code>FIND</code> will return this array <br><code>{6;6;6;6;6;6;12;12;12;12;12;12;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;‌​#VALUE!}</code> and <code>LOOKUP</code> and/or <code>AGGREGATE</code> will take the last/largest numeric value from that, i.e <code>12</code>.</p>
-</blockquote>
-</blockquote>
-
+        <p>自动获得管理员权限来运行 Batch 脚本，<code>:main</code> 以下输入要运行的脚本。</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">pushd</span> "<span class="envvar">%CD%</span>"</span><br><span class="line"><span class="built_in">CD</span> /D "%~dp0"</span><br><span class="line"></span><br><span class="line"><span class="built_in">cls</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">::管理员账户</span><br><span class="line">:: whoami /user |<span class="built_in">find</span> "-<span class="number">500</span>" &gt;<span class="stream">nul</span> <span class="number">2</span>&gt;<span class="stream">nul</span></span><br><span class="line">::<span class="flow">if</span> <span class="flow">not</span> <span class="flow">errorlevel</span> <span class="number">1</span> (<span class="flow">goto</span> AdministratorAccount) <span class="flow">else</span> <span class="flow">goto</span> OtherAccount</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">::管理员权限运行</span><br><span class="line"><span class="keyword">set</span> TempFile_Name=<span class="envvar">%SystemRoot%</span>\System32\BatTestUACin_SysRt<span class="envvar">%Random%</span>.batemp</span><br><span class="line"><span class="keyword">echo</span> <span class="envvar">%TempFile_Name%</span> <span class="number">1</span>&gt;<span class="stream">nul</span></span><br><span class="line"></span><br><span class="line">( <span class="keyword">echo</span> "BAT Test UAC <span class="flow">in</span> Temp" &gt;<span class="envvar">%TempFile_Name%</span> ) <span class="number">1</span>&gt;<span class="stream">nul</span> <span class="number">2</span>&gt;<span class="stream">nul</span></span><br><span class="line"></span><br><span class="line"> <span class="flow">if</span> <span class="flow">exist</span> <span class="envvar">%TempFile_Name%</span> (</span><br><span class="line"> <span class="keyword">echo</span> use administrator privilege</span><br><span class="line"> <span class="winutils">del</span> /f /q <span class="envvar">%TempFile_Name%</span> </span><br><span class="line"> <span class="flow">goto</span> main</span><br><span class="line">) <span class="flow">else</span> (</span><br><span class="line"> <span class="keyword">echo</span> <span class="flow">not</span> use administrator privilege</span><br><span class="line"> <span class="flow">goto</span> OtherAccount</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:OtherAccount</span><br><span class="line">%<span class="number">1</span> %<span class="number">2</span></span><br><span class="line"><span class="built_in">ver</span>|<span class="built_in">find</span> "<span class="number">5</span>."&gt;<span class="stream">nul</span>&amp;&amp;<span class="flow">goto</span> :st</span><br><span class="line">mshta vbscript:createobject("shell.application").shellexecute("%~s0","<span class="flow">goto</span> :st","","runas",<span class="number">1</span>)(window.close)&amp;<span class="flow">goto</span> :eof</span><br><span class="line"></span><br><span class="line">:st</span><br><span class="line"><span class="keyword">copy</span> "%~<span class="number">0</span>" "<span class="envvar">%windir%</span>\system32\"</span><br><span class="line"><span class="flow">goto</span> :main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:main</span><br><span class="line"></span><br><span class="line">:: Code Go Here!</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -253,7 +218,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Excel/"> #Excel </a>
+            <a href="/tags/Batch/"> #Batch </a>
           
         </div>
       
@@ -262,13 +227,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/07/04/Excel-VBA-ExtractTheLastSuccessiveNumbers/">Excel VBA: 提取最后一连串数字</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/06/17/Learn-Vim-Progressively/">逐步学习 Vim</a>
+              <a href="/2015/07/18/Kill-Process-By-Port-Number/">根据端口号来杀死进程</a>
             
           </div>
         </div>
@@ -286,8 +249,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/06/30/Find-the-last-space-in-Excel/"
-               data-title="在 Excel 单元格中查找最后一个空格（Space）的位置" data-url="http://yoursite.com/2015/06/30/Find-the-last-space-in-Excel/">
+          <div class="ds-thread" data-thread-key="2015/07/18/Get-Administrator-Privileges-to-Run-Batch-File-Automatically/"
+               data-title="自动获得管理员权限来运行 Batch 脚本" data-url="http://yoursite.com/2015/07/18/Get-Administrator-Privileges-to-Run-Batch-File-Automatically/">
           </div>
         
       </div>
