@@ -1,0 +1,618 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+    <meta name="description" content="Write blog and Stay foolish!" />
+
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: ''
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f3640894c52c81dfae8f7d5a7f83f3ac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> 偶遇：Java 从 .rft 文件读取生僻字造成乱码 // Comee </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Comee</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              偶遇：Java 从 .rft 文件读取生僻字造成乱码
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-08-14
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Java/">Java</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/08/14/Solve-Chinese-messy-code-caused-by-reading-words-from-rtf-file/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/14/Solve-Chinese-messy-code-caused-by-reading-words-from-rtf-file/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/Java/rtf.png" class="full-image"><br><a id="more"></a></p>
+<h2 id="一见未必钟情">一见未必钟情</h2><p>这是第一次遇到 .rtf 格式文件乱码问题，之前也处理过类似的问题：从 .rtf 文件中读取字符串，但一直都没有遇到乱码知道今天。</p>
+<p>原始文件内容如下：（在 Windows 下用 Word 和 写字板就可以打开）</p>
+<blockquote>
+<p>大小便失禁及心悸、胸闷、发热，亦无头痛，视物旋转，复视，黑曚，意识障碍等症。</p>
+</blockquote>
+<p>原始文件对应的 .rtf 格式字符串序列（用记事本直接打开就可以查看）：</p>
+<blockquote>
+<p>{\rtf1\ansi\ansicpg936\deff0\nouicompat\deflang1033\deflangfe2052{\fonttbl{\f0\fnil\fcharset134 \’cb\’ce\’cc\’e5;}}<br>{*\generator Riched20 6.3.9600}\viewkind4\uc1<br>\pard\nowidctlpar\qj\kerning2\f0\fs24\’b4\’f3\’d0\’a1\’b1\’e3\’ca\’a7\’bd\’fb\’bc\’b0\’d0\’c4\’bc\’c2\’a1\’a2\’d0\’d8\’c3\’c6\’a1\’a2\’b7\’a2\’c8\’c8\’a3\’ac\’d2\’e0\’ce\’de\’cd\’b7\’cd\’b4\’a3\’ac\’ca\’d3\’ce\’ef\’d0\’fd\’d7\’aa\’a3\’ac\’b8\’b4\’ca\’d3\’a3\’ac\’ba\’da\’95\’e4\’a3\’ac\’d2\’e2\’ca\’b6\’d5\’cf\’b0\’ad\’b5\’c8\’d6\’a2\’a1\’a3\par<br>}</p>
+</blockquote>
+<p>一般 Java 从 .rtf 文件读取字符串的处理方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.swing.text.BadLocationException;</span><br><span class="line"><span class="keyword">import</span> javax.swing.text.DefaultStyledDocument;</span><br><span class="line"><span class="keyword">import</span> javax.swing.text.rtf.RTFEditorKit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestRtf</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 从 .rtf 文件中读取字符串。</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@param</span> rtfFile</span><br><span class="line">     *            文件</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@return</span> 获得的字符串</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@see</span> &#123;<span class="doctag">@link</span> #getTextFromRtfFile(File, String)&#125; outputCharset="GB2312"</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">readFromRtfFile</span><span class="params">( File rtfFile )</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> readFromRtfFile( rtfFile, <span class="string">"GB2312"</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 从 .rtf 文件中读取字符串。</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@param</span> rtfFile</span><br><span class="line">     *            带读取的文件</span><br><span class="line">     * <span class="doctag">@param</span> outputCharset</span><br><span class="line">     *            输出字符串的编码</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@return</span> 读取到的字符串</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">readFromRtfFile</span><span class="params">( File rtfFile, String outputCharset )</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        String result = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            DefaultStyledDocument styledDoc = <span class="keyword">new</span> DefaultStyledDocument();</span><br><span class="line">            InputStream is = <span class="keyword">new</span> FileInputStream( rtfFile );</span><br><span class="line">            <span class="keyword">new</span> RTFEditorKit().read( is, styledDoc, <span class="number">0</span> );</span><br><span class="line">            result = <span class="keyword">new</span> String( styledDoc.getText( <span class="number">0</span>, styledDoc.getLength() ).getBytes( <span class="string">"ISO8859_1"</span> ), outputCharset );</span><br><span class="line">            <span class="comment">// 提取文本，读取中文需要使用ISO8859_1编码，否则会出现乱码</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>( IOException e )</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>( BadLocationException e )</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 从 Rtf 格式的字符序列中读取字符串。</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@param</span> rftString</span><br><span class="line">     *            Rtf 格式的字符序列</span><br><span class="line">     * <span class="doctag">@param</span> outputCharset</span><br><span class="line">     *            输出字符串的编码</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@return</span> 输出的字符串</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">readFromRtfString</span><span class="params">( String rftString, String outputCharset )</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        String result = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            DefaultStyledDocument styledDoc = <span class="keyword">new</span> DefaultStyledDocument();</span><br><span class="line">            InputStream inStream = <span class="keyword">new</span> ByteArrayInputStream( rftString.getBytes() );</span><br><span class="line"></span><br><span class="line">            <span class="keyword">new</span> RTFEditorKit().read( inStream, styledDoc, <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">            result = <span class="keyword">new</span> String( styledDoc.getText( <span class="number">0</span>, styledDoc.getLength() ).getBytes( <span class="string">"ISO8859_1"</span> ), outputCharset );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>( IOException e )</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>( BadLocationException e )</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 从 Rtf 格式的字符序列中读取字符串。</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@param</span> rftString</span><br><span class="line">     *            Rtf 格式的字符序列</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@return</span> 输出的字符串</span><br><span class="line">     * </span><br><span class="line">     * <span class="doctag">@see</span> &#123;<span class="doctag">@link</span> #readFromRtfString(String, String)&#125;</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">readFromRtfString</span><span class="params">( String rftString )</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> readFromRtfString( rftString, <span class="string">"GB2312"</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后加上 main 方法进行测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    String rtfString = <span class="string">"&#123;\\rtf1\\ansi\\ansicpg936\\deff0\\nouicompat\\deflang1033\\deflangfe2052&#123;\\fonttbl&#123;\\f0\\fnil\\fcharset134 \\'cb\\'ce\\'cc\\'e5;&#125;&#125;"</span></span><br><span class="line">            + <span class="string">"&#123;\\*\\generator Riched20 6.3.9600&#125;\\viewkind4\\uc1 "</span></span><br><span class="line">            + <span class="string">"\\pard\\nowidctlpar\\qj\\kerning2\\f0\\fs24\\'b4\\'f3\\'d0\\'a1\\'b1\\'e3\\'ca\\'a7\\'bd\\'fb\\'bc\\'b0\\'d0\\'c4\\'bc\\'c2\\'a1\\'a2\\'d0\\'d8\\'c3\\'c6\\'a1\\'a2\\'b7\\'a2\\'c8\\'c8\\'a3\\'ac\\'d2\\'e0\\'ce\\'de\\'cd\\'b7\\'cd\\'b4\\'a3\\'ac\\'ca\\'d3\\'ce\\'ef\\'d0\\'fd\\'d7\\'aa\\'a3\\'ac\\'b8\\'b4\\'ca\\'d3\\'a3\\'ac\\'ba\\'da\\'95\\'e4\\'a3\\'ac\\'d2\\'e2\\'ca\\'b6\\'d5\\'cf\\'b0\\'ad\\'b5\\'c8\\'d6\\'a2\\'a1\\'a3\\par"</span></span><br><span class="line">            + <span class="string">"&#125;"</span>;</span><br><span class="line"></span><br><span class="line">    System.out.println( readFromRtfString( rtfString ) );</span><br><span class="line">    System.out.println( readFromRtfString( rtfString, <span class="string">"GBK"</span> ) );</span><br><span class="line">    System.out.println( <span class="string">"==============================================="</span> );</span><br><span class="line">    System.out.println( readFromRtfFile( <span class="keyword">new</span> File( <span class="string">"C:\\Users\\Leo\\Desktop\\1.rtf"</span> ) ) );</span><br><span class="line">    System.out.println( readFromRtfFile( <span class="keyword">new</span> File( <span class="string">"C:\\Users\\Leo\\Desktop\\1.rtf"</span> ), <span class="string">"GBK"</span> ) );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果如下：</span></span><br><span class="line"><span class="comment">// -------------------------下面是输出结果----------------------------------</span></span><br><span class="line"><span class="comment">// 大小便失禁及心悸、胸闷、发热，亦无头痛，视物旋转，复视，黑洌?意识障碍等症。</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// 大小便失禁及心悸、胸闷、发热，亦无头痛，视物旋转，复视，黑洌馐墩习戎ⅰ?</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// ===============================================</span></span><br><span class="line"><span class="comment">// 大小便失禁及心悸、胸闷、发热，亦无头痛，视物旋转，复视，黑洌?意识障碍等症。</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// 大小便失禁及心悸、胸闷、发热，亦无头痛，视物旋转，复视，黑洌馐墩习戎ⅰ?</span></span><br></pre></td></tr></table></figure>
+<p>哎呀，天呐，乱码出现了！My God！</p>
+<h2 id="山重水复疑无路">山重水复疑无路</h2><p>细心的你也许看到了方法中的注释，读取中文的时候要使用 ISO8859_1 编码读取，实验证明确实如此（哎呀，原来是中文大神！）。输出编码也许你会说我只用了 GBK、GB2312 编码，还没有使用 UTF-8 编码，那么我告诉你 UTF-8 更惨（惨目忍睹啊！）。</p>
+<p>比较原始文件和输出日志，你应该发现了，原来是“曚”这个字捣的鬼。思路有了，查看下“曚”的 GBK 编码，发现编码为 <code>95E4</code> （为啥不查 GB2312，额 (⊙o⊙)… 因为 GB2312 编码中不包含这个字，^O^ 。）,那我们只要根据 rtf 文件编码格式来核查下“曚”这个字的编码（嘿嘿 ~~~），就知道问题出现在哪儿。在【原始文件对应的 .rtf 格式字符串序列】中确定了这个字的编码为 <code>\&#39;95\&#39;e4</code>，尼玛，这不就是 GBK 编码格式吗，为啥还乱码。</p>
+<p>凌乱中。。。。。。</p>
+<h2 id="柳暗花明又一村">柳暗花明又一村</h2><p>凌乱了 n 久，已经接近要放弃治疗了的那一刻，我突然想到了我们是以 ISO8859_1 编码来读取的，以 GBK 或 GB2312 编码输出的。那是不是在以 ISO8859_1 读取的过程中出现了问题？<br>敢想敢干才是真本事，我们将“曚”的 16 进制编码 <code>\&#39;95\&#39;e4</code> 中的 95 转换成十进制数，转换后是 149 。到<a href="https://de.wikipedia.org/wiki/ISO_8859-1" target="_blank" rel="external">维基百科 ISO_8859-1</a> 上面一查，发现了为【未建立】（英文为：nicht belegt）。啊哈哈，问题就在这里了。那对于未建立的编码，<code>str.getBytes( &quot;ISO8859_1&quot; )</code> 会如何处理呢，答案是忽略掉，对，直接忽略掉 <code>\&#39;95</code> , 下面我们验证下，怎么验证，只需要修改下 <code>readFromRtfString( String rftString, String outputCharset )</code> 方法即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 从 Rtf 格式的字符序列中读取字符串（输出中间态）。</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@param</span> rftString</span><br><span class="line"> *            Rtf 格式的字符序列</span><br><span class="line"> * <span class="doctag">@param</span> outputCharset</span><br><span class="line"> *            输出字符串的编码</span><br><span class="line"> * </span><br><span class="line"> * <span class="doctag">@return</span> 输出的字符串</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">readFromRtfString</span><span class="params">( String rftString, String outputCharset )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    String result = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        DefaultStyledDocument styledDoc = <span class="keyword">new</span> DefaultStyledDocument();</span><br><span class="line">        InputStream inStream = <span class="keyword">new</span> ByteArrayInputStream( rftString.getBytes() );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> RTFEditorKit().read( inStream, styledDoc, <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">byte</span> b : styledDoc.getText( <span class="number">0</span>, styledDoc.getLength() ).getBytes( <span class="string">"ISO8859_1"</span> ) )</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.printf( <span class="string">"\\\'%x"</span>, b );</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>( UnsupportedEncodingException e )</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        result = <span class="keyword">new</span> String( styledDoc.getText( <span class="number">0</span>, styledDoc.getLength() ).getBytes( <span class="string">"ISO8859_1"</span> ), outputCharset );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>( IOException e )</span><br><span class="line">    &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>( BadLocationException e )</span><br><span class="line">    &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    String rtfString = <span class="string">"&#123;\\rtf1\\ansi\\ansicpg936\\deff0\\nouicompat\\deflang1033\\deflangfe2052&#123;\\fonttbl&#123;\\f0\\fnil\\fcharset134 \\'cb\\'ce\\'cc\\'e5;&#125;&#125;"</span></span><br><span class="line">            + <span class="string">"&#123;\\*\\generator Riched20 6.3.9600&#125;\\viewkind4\\uc1 "</span></span><br><span class="line">            + <span class="string">"\\pard\\nowidctlpar\\qj\\kerning2\\f0\\fs24\\'b4\\'f3\\'d0\\'a1\\'b1\\'e3\\'ca\\'a7\\'bd\\'fb\\'bc\\'b0\\'d0\\'c4\\'bc\\'c2\\'a1\\'a2\\'d0\\'d8\\'c3\\'c6\\'a1\\'a2\\'b7\\'a2\\'c8\\'c8\\'a3\\'ac\\'d2\\'e0\\'ce\\'de\\'cd\\'b7\\'cd\\'b4\\'a3\\'ac\\'ca\\'d3\\'ce\\'ef\\'d0\\'fd\\'d7\\'aa\\'a3\\'ac\\'b8\\'b4\\'ca\\'d3\\'a3\\'ac\\'ba\\'da\\'95\\'e4\\'a3\\'ac\\'d2\\'e2\\'ca\\'b6\\'d5\\'cf\\'b0\\'ad\\'b5\\'c8\\'d6\\'a2\\'a1\\'a3\\par"</span></span><br><span class="line">            + <span class="string">"&#125;"</span>;</span><br><span class="line"></span><br><span class="line">    System.out.println( rtfString );</span><br><span class="line">    readFromRtfString( rtfString, <span class="string">"GB2312"</span> );</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果如下【System.out.println( rtfString )的输出】稍微做了处理，为了显示进行了断行处理：</span></span><br><span class="line"><span class="comment">// -------------------------下面是输出结果----------------------------------</span></span><br><span class="line"><span class="comment">// \'b4\'f3\'d0\'a1\'b1\'e3\'ca\'a7\'bd\'fb\'bc\'b0\'d0\'c4\'bc\'c2\'a1\'a2\'d0\'d8\'c3\'c6\'a1\'a2\'b7\'a2\'c8\'c8\'a3\'ac</span></span><br><span class="line"><span class="comment">// \'d2\'e0\'ce\'de\'cd\'b7\'cd\'b4\'a3\'ac\'ca\'d3\'ce\'ef\'d0\'fd\'d7\'aa\'a3\'ac\'b8\'b4\'ca\'d3\'a3\'ac\'ba\'da\'e4\'a3</span></span><br><span class="line"><span class="comment">// \'ac\'d2\'e2\'ca\'b6\'d5\'cf\'b0\'ad\'b5\'c8\'d6\'a2\'a1\'a3</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// \'b4\'f3\'d0\'a1\'b1\'e3\'ca\'a7\'bd\'fb\'bc\'b0\'d0\'c4\'bc\'c2\'a1\'a2\'d0\'d8\'c3\'c6\'a1\'a2\'b7\'a2\'c8\'c8\'a3\'ac</span></span><br><span class="line"><span class="comment">// \'d2\'e0\'ce\'de\'cd\'b7\'cd\'b4\'a3\'ac\'ca\'d3\'ce\'ef\'d0\'fd\'d7\'aa\'a3\'ac\'b8\'b4\'ca\'d3\'a3\'ac\'ba\'da\'95\'e4\'a3</span></span><br><span class="line"><span class="comment">// \'ac\'d2\'e2\'ca\'b6\'d5\'cf\'b0\'ad\'b5\'c8\'d6\'a2\'a1\'a3</span></span><br></pre></td></tr></table></figure>
+<p>可以在输出中清楚的看到 <code>\&#39;95</code> 被直接被忽略掉了，这也难怪后面持续显示乱码了。</p>
+<h2 id="究极还是纠结">究极还是纠结</h2><p>怎么处理呢？</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/"> #Java </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/03/Guava-Strings-java/">Guava Strings.java</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/08/14/Solve-Chinese-messy-code-caused-by-reading-words-from-rtf-file/"
+               data-title="偶遇：Java 从 .rft 文件读取生僻字造成乱码" data-url="http://yoursite.com/2015/08/14/Solve-Chinese-messy-code-caused-by-reading-words-from-rtf-file/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.png" alt="Comee" />
+          <p class="site-author-name">Comee</p>
+        </div>
+        <p class="site-description motion-element">Write blog and Stay foolish!</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/comee" target="_blank">github</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.zhihu.com/people/shao-zhu-lei-48" target="_blank">zhihu</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一见未必钟情"><span class="nav-number">1.</span> <span class="nav-text">一见未必钟情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#山重水复疑无路"><span class="nav-number">2.</span> <span class="nav-text">山重水复疑无路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#柳暗花明又一村"><span class="nav-number">3.</span> <span class="nav-text">柳暗花明又一村</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#究极还是纠结"><span class="nav-number">4.</span> <span class="nav-text">究极还是纠结</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Comee</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"comee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+
+</body>
+</html>
