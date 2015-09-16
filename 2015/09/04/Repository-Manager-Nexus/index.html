@@ -1,0 +1,706 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+    <meta name="description" content="Write blog and Stay foolish!" />
+
+
+
+  <meta name="keywords" content="Java,Maven,Nexus," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: ''
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f3640894c52c81dfae8f7d5a7f83f3ac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> 使用 Nexus 搭建 Maven 私服 // Comee </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Comee</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              使用 Nexus 搭建 Maven 私服
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-09-04
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Java/">Java</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/09/04/Repository-Manager-Nexus/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/04/Repository-Manager-Nexus/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_deployment_processes.png" alt="Nexus Deployment Processes"><br><a id="more"></a></p>
+<h2 id="为什么要使用_Repository_Manager">为什么要使用 Repository Manager</h2><p>A repository manager serves these essential purposes:</p>
+<ul>
+<li>act as dedicated（专注的） proxy server for public Maven repositories（专业的代理仓库）</li>
+<li>provide repositories as a deployment destination for your Maven project outputs（为 Maven 项目的输出提供了环境）</li>
+</ul>
+<p>使用 Repository Manager 来管理 binary 文件的好处大概如下：</p>
+<ul>
+<li>significantly reduced number of downloads off remote repositories, saving time and bandwidth resulting in increased build performance</li>
+<li>improved build stability due to reduced reliance on external repositories</li>
+<li>increased performance for interaction with remote SNAPSHOT repositories</li>
+<li>potential for control of consumed and provided artifacts</li>
+<li>creates a central storage and access to artifacts and meta data about them exposing build outputs to consumer such as other projects and developers, but also QA or operations teams or even customers</li>
+<li>provides an effective platform for exchanging binary artifacts within your organization and beyond without the need for building artifact from source</li>
+</ul>
+<p>简单翻译一下：</p>
+<ul>
+<li>减少了从远程仓库下载 artifact 的次数，节省时间和带宽（比如：中国大陆访问 Maven Center 就非常慢）；</li>
+<li>减少对外部仓库的依赖，保障构建的稳定性；</li>
+<li>提升了与远程快照仓库的交互；</li>
+<li>潜在控制了 artifacts 的来源；</li>
+<li>为“用户”提供了统一存储的地方；</li>
+<li>促进了 binary artifacts 的循环利用（避免重复打包）。</li>
+</ul>
+<h2 id="可选的_Repository_Managers">可选的 Repository Managers</h2><p>下面是常用的 Maven Repository Managers, 你可以根据个人喜好选择不同的产品。</p>
+<ul>
+<li><a href="http://archiva.apache.org/" target="_blank" rel="external">Apache Archiva</a> (open source)</li>
+<li><a href="http://www.jfrog.com/open-source/" target="_blank" rel="external">JFrog Artifactory Open Source</a> (open source)</li>
+<li><a href="http://www.jfrog.com/artifactory/" target="_blank" rel="external">JFrog Artifactory Pro</a> (commercial)</li>
+<li><a href="http://www.sonatype.org/nexus/go/" target="_blank" rel="external">Sonatype Nexus OSS</a> (open source)</li>
+<li><a href="http://www.sonatype.com/nexus/product-overview" target="_blank" rel="external">Sonatype Nexus Pro</a> (commercial)</li>
+</ul>
+<p>在这里，我们选择 Nexus OSS。</p>
+<h2 id="前期准备">前期准备</h2><p>Nexus 官网：<a href="http://www.sonatype.com/" target="_blank" rel="external">http://www.sonatype.com/</a><br>Nexus OSS(Open Source Software) 下载地址：<a href="http://www.sonatype.org/nexus/go/" target="_blank" rel="external">http://www.sonatype.org/nexus/go/</a></p>
+<p>在 Windows 平台下选择 NEXUS OSS (ZIP) 版本进行下载。</p>
+<h2 id="安装_Nexus_OSS">安装 Nexus OSS</h2><p>将下载的压缩包 nexus-2.11.4-01-bundle.zip 解压到任意目录（一般放在程序经常安装的目录里）。<br>在命令行下切换目录到 nexus-2.11.4-01-bundle\nexus-2.11.4-01\bin ，输入nexus命令，效果如下：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">D:\<span class="title">Program</span> <span class="title">Files</span>\<span class="title">nexus</span>-2.11.4-01-<span class="title">bundle</span>\<span class="title">nexus</span>-2.11.4-01\<span class="title">bin</span>&gt;<span class="title">nexus</span></span><br><span class="line"><span class="title">Usage</span>: <span class="title">nexus</span> &#123; <span class="title">console</span> : <span class="title">start</span> : <span class="title">stop</span> : <span class="title">restart</span>: <span class="title">install</span> : <span class="title">uninstall</span> &#125;</span><br><span class="line">请按任意键继续...</span></span><br></pre></td></tr></table></figure>
+<p>简单说明下各个命令的含义：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nexus console</td>
+<td style="text-align:left">以控制台的方式启动 nexus ,控制台关闭的同时 nexus 也就不可用了</td>
+</tr>
+<tr>
+<td style="text-align:left">nexus start</td>
+<td style="text-align:left">启动 nexus 服务 （要先安装服务：nexus install）</td>
+</tr>
+<tr>
+<td style="text-align:left">nexus stop</td>
+<td style="text-align:left">停止 nexus 服务</td>
+</tr>
+<tr>
+<td style="text-align:left">nexus restart</td>
+<td style="text-align:left">重新启动 nexus 服务</td>
+</tr>
+<tr>
+<td style="text-align:left">nexus install</td>
+<td style="text-align:left">安装 nexus 服务</td>
+</tr>
+<tr>
+<td style="text-align:left">nexus uninstall</td>
+<td style="text-align:left">卸载 nexus 服务</td>
+</tr>
+</tbody>
+</table>
+<p>一般我们要先运行  <code>nexus install</code> 将程序安装成 windows 服务，然后通过 <code>nexus start</code> 来启动服务，操作如下：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">D:\<span class="title">Program</span> <span class="title">Files</span>\<span class="title">nexus</span>-2.11.4-01-<span class="title">bundle</span>\<span class="title">nexus</span>-2.11.4-01\<span class="title">bin</span>&gt;<span class="title">nexus</span> <span class="title">install</span></span><br><span class="line"><span class="title">wrapper</span> | <span class="title">nexus</span> <span class="title">installed</span>.</span><br><span class="line"></span><br><span class="line"><span class="title">D</span>:\<span class="title">Program</span> <span class="title">Files</span>\<span class="title">nexus</span>-2.11.4-01-<span class="title">bundle</span>\<span class="title">nexus</span>-2.11.4-01\<span class="title">bin</span>&gt;<span class="title">nexus</span> <span class="title">start</span></span><br><span class="line"><span class="title">wrapper</span> | <span class="title">Starting</span> <span class="title">the</span> <span class="title">nexus</span> <span class="title">service</span>...</span><br><span class="line"><span class="title">wrapper</span> | <span class="title">Waiting</span> <span class="title">to</span> <span class="title">start</span>...</span><br><span class="line"><span class="title">wrapper</span> | <span class="title">Waiting</span> <span class="title">to</span> <span class="title">start</span>...</span><br><span class="line"><span class="title">wrapper</span> | <span class="title">nexus</span> <span class="title">started</span>.</span></span><br></pre></td></tr></table></figure>
+<p>至此 Nexus OSS 已经安装成 windows 服务，服务启动后，可以通过如下地址访问（Jetty 默认端口号：8081）：<br><a href="http://localhost:8081/nexus/" target="_blank" rel="external">http://localhost:8081/nexus/</a></p>
+<h2 id="登录_Nexus_OSS">登录 Nexus OSS</h2><p>用浏览器打开网址 <a href="http://localhost:8081/nexus/" target="_blank" rel="external">http://localhost:8081/nexus/</a> 会看到如下界面：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_home_nologin.png" alt="Nexus Home"><br>这个界面是非登录用户看到的效果，左侧菜单栏可以搜索 artifact 和查看 Repository ，右侧中间搜索区域同样可以进行 artifact 的搜索。</p>
+<p>点击右上角的【Log In】，使用默认的用户名：admin ，密码：admin123 登录后，则可以看到更多的功能：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_home_login.png" alt="Nexus Home"></p>
+<h2 id="Nexus_预置的仓库">Nexus 预置的仓库</h2><p>点击左侧菜单【Repositories】，查看 Nexus 内置的仓库：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_repositories.png" alt="Nexus Repositories"></p>
+<p>Nexus 的仓库分为这么几类：</p>
+<ul>
+<li>hosted 宿主仓库：主要用于部署无法从公共仓库获取的构件（如 Oracle 的 JDBC 驱动）以及自己或第三方的项目构件；</li>
+<li>proxy 代理仓库：代理公共的远程仓库；</li>
+<li>virtual 虚拟仓库：用于适配 Maven 1；</li>
+<li>group 仓库组：Nexus 通过仓库组的概念统一管理多个仓库，这样我们在项目中直接请求仓库组即可请求到仓库组管理的多个仓库。</li>
+</ul>
+<p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_repository_group.png" alt="Nexus Repository Group"></p>
+<h2 id="添加代理仓库">添加代理仓库</h2><p>Add Repository Dropdown:<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_repository-manager_add-repository-dropdown.png" alt="Add Repository Dropdown"></p>
+<p>Add Repository:<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_repository-manager_add-repository.png" alt="Add Repository"></p>
+<h2 id="将仓库添加到仓库组">将仓库添加到仓库组</h2><p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_repository-manager_add-to-group.png" alt="Add to Group"></p>
+<h2 id="搜索_artifact">搜索 artifact</h2><p>为了更好的使用 Nexus 的搜索，我们可以设置所有 proxy 仓库的 Download Remote Indexes 为 true，即允许下载远程仓库索引。<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_config_download_remote_index.png" alt="Download Remote Index"><br>索引下载成功之后，在 Browse Index 选项卡下，可以浏览到所有已被索引的构件信息，包括坐标、格式、Maven 依赖的 xml 代码：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_browse_index.png" alt="Browse Index"><br>有了索引，我们就可以搜索了：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_search_summary.png" alt="Search Summary"><br>关键字搜索：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus-search-results.png" alt="Search"><br>GAV 搜索：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus-search-results-advanced-gav.png" alt="Advanced Search"></p>
+<h2 id="将_Oracle_数据库驱动添加到_3rd_party">将 Oracle 数据库驱动添加到 3rd party</h2><p>由于 Oracle 授权问题，Maven 中央仓库本身并不包含 Oracle 的 jdbc 驱动，因此，需要我们手动将下载好的 jar 包上传到 Nexus：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus-upload-artifact.png" alt="Nexus Upload Artifact"></p>
+<h2 id="配置_Gradle_使用_Nexus">配置 Gradle 使用 Nexus</h2><blockquote>
+<p>一般使用 Gradle 的时候（Windows平台下），<br>我们都会新增系统环境变量 GRADLE_USER_HOME ，<br>并设置其值为非系统盘下的某个目录（用于缓存 Gradle 下载的 artifact，默认是缓存在 USER_HOME/.gradle 目录下 ），<br>这样做是为了减少对系统盘空间的占用。</p>
+</blockquote>
+<p>从 Nexus 下载依赖的 artifact：<br>在 build.gradle 中添加 Nexus 仓库地址：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    maven &#123;</span><br><span class="line">        url <span class="string">"http://127.0.0.1:8081/nexus/content/grioups/public"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将新项目的 artifact 上传到 Nexus：<br>项目根目录下的 build.gradle 内容如下：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">apply <span class="string">plugin:</span> <span class="string">'java'</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'maven'</span></span><br><span class="line"></span><br><span class="line">group = <span class="string">'org.sonatype.nexus.examples'</span></span><br><span class="line">version = <span class="string">'1.0.0-SNAPSHOT'</span></span><br><span class="line"><span class="comment">// version = '1.0.0-RELEASE'</span></span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">  maven &#123;</span><br><span class="line">    url <span class="string">"$&#123;nexusUrl&#125;/content/groups/public"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    testCompile <span class="string">"junit:junit:3.8.1"</span></span><br><span class="line">    compile <span class="string">"org.jbundle.util:org.jbundle.util.jbackup:2.0.0"</span></span><br><span class="line">    compile <span class="string">"net.sf.webtestfixtures:webtestfixtures:2.0.1.3"</span></span><br><span class="line">    compile <span class="string">"org.shoal:shoal-gms-api:1.5.8"</span></span><br><span class="line">    compile <span class="string">"org.ow2.util:util-i18n:1.0.22"</span></span><br><span class="line">    compile <span class="string">"com.sun.grizzly:grizzly-lzma:1.9.19-beta5"</span></span><br><span class="line">    compile <span class="string">"org.codehaus.sonar:sonar-squid:2.9"</span></span><br><span class="line">    compile <span class="string">"org.graniteds:granite-openjpa:2.2.0.SP1"</span></span><br><span class="line">    compile <span class="string">"org.apache.tomcat:tomcat-util:7.0.0"</span></span><br><span class="line">    compile <span class="string">"org.apache.camel:camel-http:2.4.0"</span></span><br><span class="line">    compile <span class="string">"org.apache.struts.xwork:xwork-core:2.2.1"</span></span><br><span class="line">    compile <span class="string">"org.jruby:jruby-complete:1.1RC1"</span></span><br><span class="line">    compile <span class="string">"org.jruby:jruby:1.6.3"</span></span><br><span class="line">    compile <span class="string">"org.mortbay.jetty:jetty:6.1.16"</span></span><br><span class="line">    compile <span class="string">"org.apache.derby:derby:10.1.2.1"</span></span><br><span class="line">    compile <span class="string">"org.springframework:spring-web:3.1.1.RELEASE"</span></span><br><span class="line">    compile <span class="string">"com.google.code.facebookapi:facebook-java-api:3.0.4"</span></span><br><span class="line">    compile <span class="string">"com.google.guava:guava:12.0"</span></span><br><span class="line">    compile <span class="string">"com.google.guava:guava-gwt:12.0"</span></span><br><span class="line">    compile <span class="string">"biz.littlej.jreqs:jreqs-guava:0.1.1"</span></span><br><span class="line">    compile <span class="string">"org.sonatype.sisu:sisu-ehcache:1.1"</span></span><br><span class="line">    compile <span class="string">"org.sonatype.sisu:sisu-xmlrpc-client:1.2.0"</span></span><br><span class="line">    compile <span class="string">"com.googlecode:kiama_2.8.1:1.0.2"</span></span><br><span class="line">    compile <span class="string">"com.googlecode:jyield:0.0.6"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">uploadArchives &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenDeployer &#123;</span><br><span class="line">            repository(<span class="string">url:</span> <span class="string">"$&#123;nexusUrl&#125;/content/repositories/releases"</span>) &#123;</span><br><span class="line">                authentication(<span class="string">userName:</span> nexusUsername, <span class="string">password:</span> nexusPassword)</span><br><span class="line">            &#125;</span><br><span class="line">            snapshotRepository(<span class="string">url:</span> <span class="string">"$&#123;nexusUrl&#125;/content/repositories/snapshots"</span>) &#123;</span><br><span class="line">                authentication(<span class="string">userName:</span> nexusUsername, <span class="string">password:</span> nexusPassword)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task wrapper( <span class="string">type:</span> Wrapper, <span class="string">description:</span> <span class="string">"create a gradlew"</span> ) &#123;</span><br><span class="line">    gradleVersion = <span class="string">'2.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>与 build.gradle 同目录下的 gradle.properties 内容如下：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nexusUrl=<span class="string">http:</span><span class="comment">//localhost:8081/nexus</span></span><br><span class="line">nexusUsername=admin</span><br><span class="line">nexusPassword=admin123</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置_HTTP_代理">配置 HTTP 代理</h2><p>一般科技公司都会有一个代理，用来访问被墙的网站（比如： Google、Facebook、Maven Center 之类的网站）, Nexus OSS 可以在 【Administration &gt; Server &gt; Default HTTP Proxy Settings(optional)】中进行 HTTP Proxy 的配置：<br><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/nexus_server_http_proxy.png" alt="Nexus Server HTTP Proxy"></p>
+<h2 id="更多…">更多…</h2><p>更多内容，比如权限设置等，请参考官方教程：<a href="https://books.sonatype.com/nexus-book/reference/" target="_blank" rel="external">Repository Management with Nexus</a></p>
+<h2 id="参考文献">参考文献</h2><ul>
+<li><a href="https://books.sonatype.com/nexus-book/reference/" target="_blank" rel="external">Nexus 使用说明 官方文档</a></li>
+<li><a href="http://www.oschina.net/question/698806_159372" target="_blank" rel="external">Maven 系列 五 ：使用Nexus搭建Maven私服</a></li>
+<li><a href="http://maven.apache.org/repository-management.html" target="_blank" rel="external">Apache Maven Project: Best Practice - Using a Repository Manager</a></li>
+</ul>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/"> #Java </a>
+          
+            <a href="/tags/Maven/"> #Maven </a>
+          
+            <a href="/tags/Nexus/"> #Nexus </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/04/Git/">Git 教程</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/14/Solve-Chinese-messy-code-caused-by-reading-words-from-rtf-file/">偶遇：Java 从 .rft 文件读取生僻字造成乱码</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/09/04/Repository-Manager-Nexus/"
+               data-title="使用 Nexus 搭建 Maven 私服" data-url="http://yoursite.com/2015/09/04/Repository-Manager-Nexus/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.png" alt="Comee" />
+          <p class="site-author-name">Comee</p>
+        </div>
+        <p class="site-description motion-element">Write blog and Stay foolish!</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/comee" target="_blank">github</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.zhihu.com/people/shao-zhu-lei-48" target="_blank">zhihu</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用_Repository_Manager"><span class="nav-number">1.</span> <span class="nav-text">为什么要使用 Repository Manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可选的_Repository_Managers"><span class="nav-number">2.</span> <span class="nav-text">可选的 Repository Managers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前期准备"><span class="nav-number">3.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装_Nexus_OSS"><span class="nav-number">4.</span> <span class="nav-text">安装 Nexus OSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录_Nexus_OSS"><span class="nav-number">5.</span> <span class="nav-text">登录 Nexus OSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nexus_预置的仓库"><span class="nav-number">6.</span> <span class="nav-text">Nexus 预置的仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加代理仓库"><span class="nav-number">7.</span> <span class="nav-text">添加代理仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将仓库添加到仓库组"><span class="nav-number">8.</span> <span class="nav-text">将仓库添加到仓库组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索_artifact"><span class="nav-number">9.</span> <span class="nav-text">搜索 artifact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将_Oracle_数据库驱动添加到_3rd_party"><span class="nav-number">10.</span> <span class="nav-text">将 Oracle 数据库驱动添加到 3rd party</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置_Gradle_使用_Nexus"><span class="nav-number">11.</span> <span class="nav-text">配置 Gradle 使用 Nexus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置_HTTP_代理"><span class="nav-number">12.</span> <span class="nav-text">配置 HTTP 代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多…"><span class="nav-number">13.</span> <span class="nav-text">更多…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">14.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Comee</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"comee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+
+</body>
+</html>
