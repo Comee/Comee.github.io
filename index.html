@@ -214,24 +214,12 @@
 
       
         
-          <h2 id="&lt;!DOCTYPE_html&gt;">&lt;!DOCTYPE html&gt;</h2><p>&lt;!DOCTYPE&gt; 声明必须是 HTML 文档的第一行，位于 <html> 标签之前，作用是告诉浏览器使用 <em>Standards Mode</em> 来解析整个文档。<br>不区分大小写，常见的写法有：</html></p>
-<ul>
-<li><code>&lt;!DOCTYPE html&gt;</code></li>
-<li><code>&lt;!Doctype html&gt;</code></li>
-<li><code>&lt;!doctype html&gt;</code></li>
-</ul>
-<p>检查浏览器使用的解析模式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mode = <span class="built_in">document</span>.compatMode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (mode === <span class="string">'CSS1Compat'</span>) &#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">'This document is rendered in &lt;em&gt;Standards mode&lt;/em&gt;.'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mode === <span class="string">'BackCompat'</span>) &#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">'This document is rendered in &lt;em&gt;Quirks mode&lt;/em&gt;.'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">'This document is weird.  document.compatMode = '</span> + mode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>为什么 <code>&lt;!DOCTYPE html&gt;</code> 声明兼容 IE6 ？</p>
-<h2 id=""><html prefix="og: http://ogp.me/ns#"></html></h2><h2 id="-1"><html lang="zh-Hans-CN"></html></h2><h2 id="参考文献">参考文献</h2><ul>
-<li><a href="https://hsivonen.fi/doctype/" target="_blank" rel="external">Activating Browser Modes with Doctype</a></li>
-<li><a href="https://html.spec.whatwg.org/multipage/" target="_blank" rel="external">HTML Living Standard</a></li>
-<li><a href="http://ogp.me/" target="_blank" rel="external">The Open Graph protocol</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2008/02/codes_for_language_names.html" target="_blank" rel="external">语种名称代码</a></li>
-<li><a href="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry" target="_blank" rel="external">Language Subtag Registry</a></li>
-<li><a href="http://www.ietf.org/rfc/rfc4646.txt" target="_blank" rel="external">RTF 4646</a></li>
-<li><a href="http://www.zhihu.com/question/20797118" target="_blank" rel="external">网页头部的声明应该是用 lang=”zh” 还是 lang=”zh-cn”？</a></li>
-</ul>
-
+          <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/html_something_about_it.png" alt="Something About Html"><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/09/23/Something-About-HTML/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

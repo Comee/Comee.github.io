@@ -209,22 +209,278 @@
       
 
       
-        <h2 id="&lt;!DOCTYPE_html&gt;">&lt;!DOCTYPE html&gt;</h2><p>&lt;!DOCTYPE&gt; 声明必须是 HTML 文档的第一行，位于 <html> 标签之前，作用是告诉浏览器使用 <em>Standards Mode</em> 来解析整个文档。<br>不区分大小写，常见的写法有：</html></p>
+        <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/html_something_about_it.png" alt="Something About Html"><br><a id="more"></a></p>
+<h2 id="!DOCTYPE_html">!DOCTYPE html</h2><p><code>&lt;!DOCTYPE&gt;</code> 声明必须是 HTML 文档的第一行，位于 <code>&lt;html&gt;</code> 标签之前，作用是告诉浏览器使用 <em>Standards Mode</em> 来解析整个文档。</p>
+<p>不区分大小写，常见的写法有：</p>
 <ul>
 <li><code>&lt;!DOCTYPE html&gt;</code></li>
 <li><code>&lt;!Doctype html&gt;</code></li>
 <li><code>&lt;!doctype html&gt;</code></li>
 </ul>
+<p><code>text/html</code> 文档常用模式（详情参见<a href="https://hsivonen.fi/doctype/" target="_blank" rel="external">Activating Browser Modes with Doctype</a>）：</p>
+<ul>
+<li>Quirks Mode （怪异模式）</li>
+<li>Standards Mode （标准模式）</li>
+<li>Almost Standards Mode （几乎标准模式）</li>
+</ul>
 <p>检查浏览器使用的解析模式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mode = <span class="built_in">document</span>.compatMode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (mode === <span class="string">'CSS1Compat'</span>) &#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">'This document is rendered in &lt;em&gt;Standards mode&lt;/em&gt;.'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mode === <span class="string">'BackCompat'</span>) &#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">'This document is rendered in &lt;em&gt;Quirks mode&lt;/em&gt;.'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">'This document is weird.  document.compatMode = '</span> + mode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>为什么 <code>&lt;!DOCTYPE html&gt;</code> 声明兼容 IE6 ？</p>
-<h2 id=""><html prefix="og: http://ogp.me/ns#"></html></h2><h2 id="-1"><html lang="zh-Hans-CN"></html></h2><h2 id="参考文献">参考文献</h2><ul>
+<p>为什么 <code>&lt;!DOCTYPE html&gt;</code> 声明兼容 IE6 ？<br>在 <a href="http://www.w3.org/TR/html-design-principles/" target="_blank" rel="external">HTML Design Principles</a>、<a href="http://www.infoq.com/cn/news/2011/04/html5-design" target="_blank" rel="external">Jeremy Keith谈HTML5设计原则</a> 中有说到 HTML5 设计原则，其实早期版本的浏览器并不需要<em>文档声明</em>，在进行元素和属性解析时，只是根据浏览器可以识别的内容来进行解析，不可以识别的内容就使用内置的默认方式来解析，那时候的 <code>!DOCTYPE</code> 主要是给 Validator 用的。但是 The Macintosh version of Internet Explorer 5.0 开启了新的模式，通过检测 <code>!DOCTYPE</code> 来决定是采用 W3C 建议的 Standards Mode 还是采用之前的非标准化的 Quirks Mode 。Internet Explorer 6.0 作为后来版本，自然也支持根据 <code>!DOCTYPE</code> 来开启对应的解析方式。详细内容可参见：<a href="http://www.blooberry.com/indexdot/html/tagpages/d/doctype.htm" target="_blank" rel="external">!DOCTYPE</a>。</p>
+<h2 id="prefix=”og:http://ogp-me/ns#“">prefix=”og:<a href="http://ogp.me/ns#" target="_blank" rel="external">http://ogp.me/ns#</a>“</h2><p><code>&lt;html prefix=&quot;og: http://ogp.me/ns#&quot;&gt;</code><br>og 是一种新的 HTTP 头部标记，即 Open Graph Protocol：</p>
+<blockquote>
+<p>The Open Graph Protocol enables any web page to become a rich object in a social graph. </p>
+</blockquote>
+<p>即这种协议可以让网页成为一个<em>富媒体对象</em>。</p>
+<p>用了 <code>meta property=og</code> 标签，就是你同意了网页内容可以被其他社会化网站引用等，目前这种协议被 SNS 网站如 Fackbook 、 renren 采用。</p>
+<p>SNS 已经成为网络上的一大热门应用，优质的内容通过分享在好友间迅速传播。为了提高站外内容的传播效率， 2010 年 F8 会议上 Facebook 公布了一套开放内容协议 (Open Graph Protocol) ，任何网页只要遵守该协议，SNS 就能从页面上提取最有效的信息并呈现给用户。</p>
+<p>Open Graph Protocol 的官网为 <a href="http://ogp.me/" target="_blank" rel="external">http://ogp.me/</a> ，里面有详细的使用说明。</p>
+<h2 id="html_lang=”zh-Hans-CN”_还是_html_lang=”zh-CN”">html lang=”zh-Hans-CN” 还是 html lang=”zh-CN”</h2><p>在 <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#attr-lang" target="_blank" rel="external">HTML 5.1 Nightly W3C Editor’s Draft 03 October 2015</a> 中指出，目前最新的语言标签标记法的国际标准是 <a href="http://www.ietf.org/" target="_blank" rel="external">IETF</a> 的 <a href="http://www.ietf.org/rfc/bcp/bcp47.txt" target="_blank" rel="external">BCP 47</a>(Best Current Practice)，也就是 <a href="http://www.rfc-editor.org/rfc/rfc5646.txt" target="_blank" rel="external">RFC 5646</a>，取代了之前的<a href="http://www.rfc-editor.org/rfc/rfc4646.txt" target="_blank" rel="external">RFC 4646</a>、<a href="http://www.ietf.org/rfc/rfc3066.txt" target="_blank" rel="external">3066</a> 和<a href="http://www.ietf.org/rfc/rfc1766.txt" target="_blank" rel="external">1766</a>。</p>
+<p>RFC 5646和之前版本的区别：</p>
+<ul>
+<li>所有子标签都在 <a href="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry" target="_blank" rel="external">IANA registry</a> 查询。</li>
+<li>所有子标签有固定的位置和长度。</li>
+<li>描述更具灵活性。</li>
+</ul>
+<p>RFC 5646规定语言标签按以下形式排列：<br>language-extlang-script-region-variant-extension-privateuse</p>
+<p>所有语言标签都是大小写无关的，但是依照惯例 language 标签小写，region 标签大写，script 标签首字大写。</p>
+<p>所有标签都可以在 <a href="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry" target="_blank" rel="external">IANA registry</a> 查询，获取更多信息可以阅读 <a href="http://www.w3.org/International/questions/qa-choosing-language-tags" target="_blank" rel="external">Choosing a language tag</a>、<a href="http://www.w3.org/International/articles/language-tags/" target="_blank" rel="external">Language tags in HTML and XML</a>。</p>
+<p>如果仔细看语言tag（bcp47）的BNF语法定义，bcp47 中语言 tag 的 BNF 语法定义在的第三、四页：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Language-Tag  = langtag             ; normal language tags</span><br><span class="line">              / privateuse          ; private use tag</span><br><span class="line">              / grandfathered       ; grandfathered tags</span><br></pre></td></tr></table></figure>
+<p>规范的语言 tag 必须是符合 3 种情况其中的一种。第二种的私有定义我们就不讨论了，而第三种为了兼容和过渡，比如<code>zh-xiang</code>，为什么说<code>zh-xiang</code>特例，后面会说到。</p>
+<p>我们只关注第一种情况：看看 langtag 的定义：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">langtag       = language</span><br><span class="line">                ["-" script]</span><br><span class="line">                ["-" region]</span><br><span class="line">                *("-" variant)</span><br><span class="line">                *("-" extension)</span><br><span class="line">                ["-" privateuse]</span><br><span class="line"></span><br><span class="line">language      = 2*3ALPHA            ; shortest ISO 639 code</span><br><span class="line">                ["-" extlang]       ; sometimes followed by</span><br><span class="line">                                    ; extended language subtags</span><br><span class="line">              / 4ALPHA              ; or reserved for future use</span><br><span class="line">              / 5*8ALPHA            ; or registered language subtag</span><br><span class="line"></span><br><span class="line">extlang       = 3ALPHA              ; selected ISO 639 codes</span><br><span class="line">                *2("-" 3ALPHA)      ; permanently reserved</span><br><span class="line"></span><br><span class="line">script        = 4ALPHA              ; ISO 15924 code</span><br><span class="line"></span><br><span class="line">region        = 2ALPHA              ; ISO 3166-1 code</span><br><span class="line">              / 3DIGIT              ; UN M.49 code</span><br><span class="line"></span><br><span class="line">variant       = 5*8alphanum         ; registered variants</span><br><span class="line">              / (DIGIT 3alphanum)</span><br><span class="line"></span><br><span class="line">extension     = singleton 1*("-" (2*8alphanum))</span><br><span class="line"></span><br><span class="line">                                    ; Single alphanumerics</span><br><span class="line">                                    ; "x" reserved for private use</span><br><span class="line">singleton     = DIGIT               ; 0 - 9</span><br><span class="line">              / %x41-57             ; A - W</span><br><span class="line">              / %x59-5A             ; Y - Z</span><br><span class="line">              / %x61-77             ; a - w</span><br><span class="line">              / %x79-7A             ; y - z</span><br><span class="line"></span><br><span class="line">privateuse    = "x" 1*("-" (1*8alphanum))</span><br><span class="line"></span><br><span class="line">grandfathered = irregular           ; non-redundant tags registered</span><br><span class="line">              / regular             ; during the RFC 3066 era</span><br><span class="line"></span><br><span class="line">irregular     = "en-GB-oed"         ; irregular tags do not match</span><br><span class="line">              / "i-ami"             ; the 'langtag' production and</span><br><span class="line">              / "i-bnn"             ; would not otherwise be</span><br><span class="line">              / "i-default"         ; considered 'well-formed'</span><br><span class="line">              / "i-enochian"        ; These tags are all valid,</span><br><span class="line">              / "i-hak"             ; but most are deprecated</span><br><span class="line">              / "i-klingon"         ; in favor of more modern</span><br><span class="line">              / "i-lux"             ; subtags or subtag</span><br><span class="line">              / "i-mingo"           ; combination</span><br></pre></td></tr></table></figure>
+<p><code>langtag</code> 定义中很明确：<code>language</code> 是必须的，后面 <code>script</code> ， <code>region</code> ， <code>variant</code> 都为可选，且必须使用 <code>-</code> 分隔， <code>varient</code> 和 <code>extension</code> 可以出现 0 次或无数次，而 <code>script</code> 等只能出现 0 或 1 次。</p>
+<p>这个最重要的 <code>language</code> 的定义有三种情况：使用最短 <a href="http://loc.gov/standards/" target="_blank" rel="external">ISO 639</a> 代码 2 个或 3 个字符（注意这个最短！！）加可选的 <code>extlang</code> （3 个字符长度的 <a href="http://www-01.sil.org/iso639-3/codes.asp" target="_blank" rel="external">ISO 639-3</a> 代码）。 language 必须优先考虑 ISO 639-1 中的代码，如果没有则选择 639-2 中三位的，如果有 extlang ，那 extlang 必须使用 ISO 639-3 中的代码和扩展预留。</p>
+<p>另外两种 <code>language</code> 的定义，一个是必须 4 个字符长度保留，另一个是 5 到 8 个字符的 <code>subtag</code> 。 <code>subtag</code> 其实就是一个符合 <code>language</code> 的定义，因为 <code>extlang</code> 的扩展可以出现 0 到 2 次，所以 <code>subtag</code> 的字符长度可能是 5-8 之间。</p>
+<p>这里稍微岔开一下说说 ISO639 的问题， ISO639 规范下有 6 个部分， 639-1 是 2 字符编码， 639-2 是 3 字符编码，相对 <code>ISO 639-1</code> 来说另一种表示方法，他们都是属于 <code>ISO 639</code> 的一部分，不存在新旧替换的问题。用途不一，就比如说 <code>ISO 639-2</code> 存在两种编码， B 类用于书籍著作等， T 类则用于技术。接下来就是 639-3 ，其实是 <code>ISO 639-2</code> 的超集。剩下的 4、5、6 都是实现指导和族的分类编码等，干其他用的，和 bcf47 没太大关系。</p>
+<p><code>zh</code> 和 <code>zho</code> 在 639-3 中分类属于宏语言（macrolanguage，其实就像香蕉、苹果都叫水果一样，水果就属于macro）而 <code>yue</code> ， <code>cmn</code> 则是独立语言（individual）。在非 bcf47 的用途上说，<code>zh-cmn-Hans</code> 这种用法没错。但在 bcp47 中，这种用法则不符合 <em>shortest ISO 639 code</em> 这一要求。所以 <code>language</code> 定义的要优先考虑 <code>ISO 639-1</code> 的编码，如果不存在则使用 <code>ISO 639-2</code> 。需要 <code>extlang</code> ，则从 <code>ISO 639-3</code> 中 individual 选取，因为 macrolanguage 的编码在 639-1 和 639-2 中已经有了。因此 <code>zh, zh-yue, ar, ar-arb</code> 都是符合规范的 language 定义的。</p>
+<p>所以说 <code>zh-xiang</code> 并不符合 language 的语义定义，它定义于 grandfathered 中为了兼容和过度。</p>
+<p>接着 language 后都是可选的，但必须保证先后次序！ script 是描述使用 <em>脚本</em> ，按我意思理解就是使用哪种文字表述方式，这个值必须使用 <code>ISO 15924</code> 的编码， 4 个字符长度。获取 ios 系统的语言环境就可以见到这种 language+script 方式。比如简体中文就是 zh-Hans ，繁体中文就是 zh-Hant 。</p>
+<p>我们如果是在 ios 中获取 locale 信息，返回的就是 language+script+region ， region 的定义使用 <code>ISO 3166-1</code> 的 2 个大写字符编码或者 <a href="http://unstats.un.org/unsd/methods/m49/m49alpha.htm" target="_blank" rel="external">UN M.49</a> 三位数字编码。比如 <code>US、TW、CN</code> 。当然我们如果不用 script 那就是我们最最常见的了：<code>zh-TW、zh-CN、en-US、en-GB</code> 。基本大部分操作系统和浏览器依然沿用这种 language+region 的方式。其实形式是非常符合规范的，没有听说要替换！剩下就是可以出现 0 次或 n 次的和变体和扩展，这个除非你针对非常专业语言分类才用得上。对于技术上说，网页和操作系统，基本也就是 language+script+region 就足够了！</p>
+<p>接下来回答这个纠结的问题，究竟用 <code>zh</code> ，还是 <code>zh-CN</code> 。我的意见是语言声明写不写用处不大，你要关心的是你采用的什么字符集而已，如果是 <code>utf8</code> 编码，你页面就是写泰语、日语、韩语和汉语，照样都能显示！除非你用的特殊字体，访问者电脑上没这些字体。</p>
+<p>如果你是想做网站的自动多国语言支持，浏览器请求头中 Accept-Language 中告诉你用户正在使用哪种语言，你就可以根据请求中的语言标记来安排服务器返回什么语言的内容给他。</p>
+<p>linxu、windows、mac的应用程序实现的自动多国语言支持也是这样，去访问系统或提供给你的 locale 信息，这个信息都是符合 bcp47 的。开发程序时，就不要文字内容写带代码中，而是提供语言包，程序根据获取到的当前的 locale 信息去判断应该使用那个语言包。只不过有些系统提供的是 language+region ，如：linux，android 等。有些是用 language+script+region 如苹果的系统。 </p>
+<p>综上所述，HTML 页面中使用 <code>lang=&quot;zh-CN&quot;</code> 就 OK 了。其实查看一些大型网站，你就会发现，简体中文基本使用的都是 <code>lang=&quot;zh-CN&quot;</code> ， 繁体中文（香港）一般使用 <code>lang=&quot;zh-HK&quot;</code> 。</p>
+<h2 id="itemscope_与_itemtype">itemscope 与 itemtype</h2><p><code>&lt;head itemscope itemtype=&quot;http://schema.org/WebSite&quot;&gt;</code> 这个是 HTML 微数据的应用，在 W3C 规范 <a href="http://www.w3.org/TR/microdata/" target="_blank" rel="external">HTML Microdata</a> 中有介绍。HTML Microdata 是对搜索引擎友好的，是 SEO(Search Engine Optimization) 的一部分。</p>
+<p>简单介绍下：<br><strong>itemscope</strong><br>定义一组名值对，称为项。</p>
+<p><strong>itemprop=”属性名”</strong><br>添加一个数据项属性。这个属性名可以是个单词或是个 URL ，与元素包含的文本值相关：</p>
+<ul>
+<li>对于大部分元素，属性名值就是元素标签里面的文本值（不是所有标签）。</li>
+<li>对于有URL属性的元素，该值就是 URL （如 <code>&lt;img src=&quot;&quot;&gt;</code>, <code>&lt;a href=&quot;&quot;&gt;</code>, <code>&lt;object data=&quot;&quot;&gt;</code> 等）。</li>
+<li>对于 <code>&lt;time&gt;</code> 元素，该值就是 <code>datetime=&quot;&quot;</code> 属性。</li>
+<li>对于 <code>&lt;meta itemprop=&quot;&quot; content=&quot;&quot;&gt;</code> ， 该值就是 <code>content=&quot;&quot;</code> 属性。</li>
+</ul>
+<p><strong>itemref=””</strong><br>允许微数据项通过指向特定 ID （含有需要属性的元素）包含非后代属性。</p>
+<p><strong>itemtype=””</strong><br>微数据定义的类型。其值为 URL ，扮演词汇表名称的作用。</p>
+<p><strong>itemid=””</strong><br>允许词汇表给微数据项定义一个全局标识符，例如书的 ISBN 数值，在同样元素上使用 itemid 作为数据项的 itemscope 和 itemtype 属性。</p>
+<p>微数据词汇表有三： schema.org 词汇表， Google 丰富摘要词汇表(www.data-vocabulary.org)， WHATWG/microformats.org 词汇表。</p>
+<p>Google 丰富摘要词汇支持 微格式 和 RDFa ， 这是除了微数据之外其他两个增加内容语义的方法。除了这种差异外，基本上与 schema.org 是相匹配的，除非他们在 itemtype 中使用 www.data-vocabulary.org 代替 schema.org 。尽管 google 仍然支持这类词汇，但是最新的 schema.org 提供了更多的词汇，这些词汇还被 Bing 和 Yahoo 支持，因此在选择微数据上 schema.org 可以让你笑得更久。不过您可能仍然希望嵌入”富文档摘要”，因为它们代码更简单，书写的时候要比 schema.org 来得更好。</p>
+<h2 id="X-UA-Compatible"><code>X-UA-Compatible</code></h2><p><code>X-UA-Compatible</code> 是在 IE8 才开始支持的，<code>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=EmulateIE7, IE=9&quot; /&gt;</code> 表示 IE7 使用 IE7 的 <a href="https://msdn.microsoft.com/en-us/library/ff406036(v=vs.85" target="_blank" rel="external">Document Mode</a>.aspx)，IE9 使用 IE9 Mode(if a valid <code>&lt;!DOCTYPE&gt;</code> declaration is present, otherwise Quirks Mode.)，IE8 则模拟 IE7的文档模式，使用 IE7 Mode(if a valid <code>&lt;!DOCTYPE&gt;</code> declaration is present, otherwise Quirks Mode.)。<br>详细介绍请参照：<a href="http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e" target="_blank" rel="external">http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e</a></p>
+<p>下面为部分提取的内容：<br>The X-UA-Compatible meta tag allows web authors to choose what version of Internet Explorer the page should be rendered as. IE11 has made changes to these modes; see the IE11 note below. Microsoft Edge, the browser that will be released after IE11, will only honor the X-UA-Compatible meta tag in certain circumstances. See the Microsoft Edge note below.</p>
+<p>According to Microsoft, when using the X-UA-Compatible tag, it should be as high as possible in your document head:</p>
+<blockquote>
+<p>If you are using the X-UA-Compatible META tag you want to place it as close to the top of the page’s HEAD as possible. Internet Explorer begins interpreting markup using the latest version. When Internet Explorer encounters the X-UA-Compatible META tag it starts over using the designated version’s engine. This is a performance hit because the browser must stop and restart analyzing the content.</p>
+</blockquote>
+<p>Here are your options:</p>
+<ul>
+<li>“IE=edge”</li>
+<li>“IE=11”</li>
+<li>“IE=EmulateIE11”</li>
+<li>“IE=10”</li>
+<li>“IE=EmulateIE10”</li>
+<li>“IE=9”</li>
+<li>“IE=EmulateIE9</li>
+<li>“IE=8”</li>
+<li>“IE=EmulateIE8”</li>
+<li>“IE=7”</li>
+<li>“IE=EmulateIE7”</li>
+<li>“IE=5”</li>
+</ul>
+<p>To attempt to understand what each means, here are definitions provided by Microsoft:</p>
+<blockquote>
+<p>Internet Explorer supports a number of document compatibility modes that enable different features and can affect the way content is displayed:</p>
+<p>Edge mode tells Internet Explorer to display content in the highest mode available. With Internet Explorer 9, this is equivalent to IE9 mode. If a future release of Internet Explorer supported a higher compatibility mode, pages set to edge mode would appear in the highest mode supported by that version. Those same pages would still appear in IE9 mode when viewed with Internet Explorer 9. Internet Explorer supports a number of document compatibility modes that enable different features and can affect the way content is displayed:</p>
+<p>IE11 mode provides the highest support available for established and emerging industry standards, including the HTML5, CSS3 and others.<br>IE10 mode provides the highest support available for established and emerging industry standards, including the HTML5, CSS3 and others.</p>
+<p>IE9 mode provides the highest support available for established and emerging industry standards, including the HTML5 (Working Draft), W3C Cascading Style Sheets Level 3 Specification (Working Draft), Scalable Vector Graphics (SVG) 1.0 Specification, and others. [Editor Note: IE 9 does not support CSS3 animations].</p>
+<p>IE8 mode supports many established standards, including the W3C Cascading Style Sheets Level 2.1 Specification and the W3C Selectors API; it also provides limited support for the W3C Cascading Style Sheets Level 3 Specification (Working Draft) and other emerging standards.</p>
+<p>IE7 mode renders content as if it were displayed in standards mode by Internet Explorer 7, whether or not the page contains a directive.</p>
+<p>Emulate IE9 mode tells Internet Explorer to use the directive to determine how to render content. Standards mode directives are displayed in IE9 mode and quirks mode directives are displayed in IE5 mode. Unlike IE9 mode, Emulate IE9 mode respects the directive.</p>
+<p>Emulate IE8 mode tells Internet Explorer to use the directive to determine how to render content. Standards mode directives are displayed in IE8 mode and quirks mode directives are displayed in IE5 mode. Unlike IE8 mode, Emulate IE8 mode respects the directive.</p>
+<p>Emulate IE7 mode tells Internet Explorer to use the directive to determine how to render content. Standards mode directives are displayed in Internet Explorer 7 standards mode and quirks mode directives are displayed in IE5 mode. Unlike IE7 mode, Emulate IE7 mode respects the directive. For many web sites, this is the preferred compatibility mode.</p>
+<p>IE5 mode renders content as if it were displayed in quirks mode by Internet Explorer 7, which is very similar to the way content was displayed in Microsoft Internet Explorer 5.</p>
+</blockquote>
+<p><strong>IE 10 NOTE:</strong> As of Internet Explorer 10, quirks mode behaves differently than it did in earlier versions of the browser. In Windows Internet Explorer 9 and earlier versions, quirks mode restricted the webpage to the features supported by Microsoft Internet Explorer 5.5. In Internet Explorer 10, quirks mode conforms to the differences specified in the HTML5 specification.</p>
+<p>Personally, I always choose the <strong>http-equiv=”X-UA-Compatible” content=”IE=edge”</strong> meta tag, as older versions have plenty of bugs, and I do not want IE to decide to go into “Compatibility mode” and show my site as IE7 vs IE8 or 9. I always prefer the latest version of IE.</p>
+<p><strong>IE 11</strong><br>From Microsoft:</p>
+<blockquote>
+<p>Starting with IE11, edge mode is the preferred document mode; it represents the highest support for modern standards available to the browser.</p>
+<p>Use the HTML5 document type declaration to enable edge mode:</p>
+<p>&lt;!doctype html&gt;</p>
+<p>Edge mode was introduced in Internet Explorer 8 and has been available in each subsequent release. Note that the features supported by edge mode are limited to those supported by the specific version of the browser rendering the content.</p>
+<p>Starting with IE11, <strong>document modes are deprecated and should no longer be used</strong>, except on a temporary basis. Make sure to update sites that rely on legacy features and document modes to reflect modern standards.</p>
+<p>If you must target a specific document mode so that your site functions while you rework it to support modern standards and features, be aware that you’re using a transitional feature, one that may not be available in future versions.</p>
+<p>If you currently use the x-ua-compatible header to target a legacy document mode, it’s possible your site won’t reflect the best experience available with IE11.</p>
+</blockquote>
+<p><strong>Microsoft Edge (Replacement for Internet Explorer that comes bundled with Windows 10)</strong></p>
+<p>Information on X-UA-Compatible meta tag for the “Edge” version of IE. From Microsoft:</p>
+<blockquote>
+<p><strong>Introducing the “living” Edge document mode</strong></p>
+<p>As we announced in August 2013, we are deprecating document modes as of IE11. With our latest platform updates, the need for legacy document modes is primarily limited to Enterprise legacy web apps. With new architectural changes, these legacy document modes will be isolated from changes in the “living” Edge mode, which will help to guarantee a much higher level of compatibility for customers who depend on those modes and help us move even faster on improvements in Edge. The next major version of IE will still honor document modes served by intranet sites, sites on the Compatibility View list, and when used with Enterprise Mode only.</p>
+<p>Public Internet sites will be rendered with the new Edge mode platform (ignoring X-UA-Compatible). It is our goal that Edge is the “living” document mode from here out and no further document modes will be introduced going forward.</p>
+</blockquote>
+<p>With the changes in Microsoft Edge to no longer support document modes in most cases, Microsoft has a <a href="https://dev.modern.ie/tools/" target="_blank" rel="external">tool to scan your site</a> to check and see if it has code that is not compatible with Edge.</p>
+<p><strong>Chrome=1 Info for IE</strong></p>
+<p>There is also chrome=1 that you can use or use together with one of the above options, EX: <code>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=Edge,chrome=1&quot;&gt;</code> chrome=1 is for Google’s Chrome Frame which is defined as:</p>
+<blockquote>
+<p>Google Chrome Frame is an open source browser plug-in. Users who have the plug-in installed have access to Google Chrome’s open web technologies and speedy JavaScript engine when they open pages in the browser.</p>
+<p>Google Chrome Frame seamlessly enhances your browsing experience in Internet Explorer. It displays Google Chrome Frame enabled sites using Google Chrome’s rendering technology, giving you access to the latest HTML5 features as well as Google Chrome’s performance and security features without in any way interrupting your usual browser usage.</p>
+<p>When Google Chrome Frame is installed, the web just gets better without you having to think about it.</p>
+</blockquote>
+<p>But for that plug-in to work you must use chrome=1 in the X-UA-Compatible meta tag.</p>
+<p>More info on Chrome Frame can be found here.</p>
+<p><strong>Note:</strong> Google Chrome Frame only works for IE6 through IE9, and was retired on February 25, 2014. <a href="http://blog.chromium.org/2013/06/retiring-chrome-frame.html" target="_blank" rel="external">More info can be found here</a>. </p>
+<p><strong>Validation:</strong></p>
+<p><strong>HTML5:</strong><br>The page will validate using the <a href="http://validator.w3.org/" target="_blank" rel="external">W3 Validator</a> only when using <code>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=Edge&quot;&gt;</code>. For other values it will throw the error: A meta element with an http-equiv attribute whose value is X-UA-Compatible must have a content attribute with the value IE=edge. In other words, if you have IE=edge,chrome=1 it will not validate. I ignore this error completely as modern browsers simply ignore this line of code.</p>
+<p>If you must have completely valid code then consider doing this on the server level by setting HTTP header. As a note, Microsoft says, If both of these instructions are sent (meta and HTTP), the developer’s preference (meta element) takes precedence over the web server setting (HTTP header).</p>
+<p><strong>XHTML</strong></p>
+<p>There isn’t an issue with validation when using <code>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=Edge&quot; /&gt;</code> as long as the tag is properly closed, IE: <code>/&gt;</code> vs <code>&gt;</code></p>
+<p>For more information on X-UA-Compatible see Microsoft’s Website <a href="https://msdn.microsoft.com/en-us/library/cc288325(v=vs.85" target="_blank" rel="external">Defining Document Compatibility</a>.aspx).</p>
+<p>For more information on what IE supports see the website <a href="http://caniuse.com/" target="_blank" rel="external">caniuse.com</a></p>
+<h2 id="viewport"><code>viewport</code></h2><h3 id="什么是Viewport">什么是Viewport</h3><p>手机浏览器是把页面放在一个虚拟的“窗口”（viewport）中，通常这个虚拟的“窗口”（viewport）比屏幕宽，这样就不用把每个网页挤到很小的窗口中（这样会破坏没有针对手机浏览器优化的网页的布局），用户可以通过平移和缩放来看网页的不同部分。移动版的 Safari 浏览器最新引进了 viewport 这个 meta tag ，让网页开发者来控制 viewport 的大小和缩放，其他手机浏览器也基本支持。</p>
+<h3 id="Viewport_基础">Viewport 基础</h3><p>一个常用的针对移动网页优化过的页面的 viewport meta 标签大致如下：</p>
+<p><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no&quot;&gt;</code></p>
+<ul>
+<li>width：控制 viewport 的大小，可以指定的一个值，如果 600，或者特殊的值，如 device-width 为设备的宽度（单位为缩放为 100% 时的 CSS 的像素）。</li>
+<li>height：和 width 相对应，指定高度。</li>
+<li>initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。</li>
+<li>maximum-scale：允许用户缩放到的最大比例。</li>
+<li>minimum-scale：允许用户缩放到的最小比例。</li>
+<li>user-scalable：用户是否可以手动缩放</li>
+</ul>
+<h3 id="Viewport_参考资料">Viewport 参考资料</h3><p>Mozilla 开发者博客上有 viewport 使用教程：<a href="https://developer.mozilla.org/zh-CN/docs/Mobile/Viewport_meta_tag" target="_blank" rel="external">在移动浏览器中使用viewport元标签控制布局</a>。<br>Apple 开发者站上面有 viewport 详细的描述：<a href="https://developer.apple.com/library/prerelease/ios/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html" target="_blank" rel="external">Configuring the Viewport</a>。<br>quirksmode.org 有详细的 viewport 在各个手机浏览器不同之处介绍：<a href="http://www.quirksmode.org/mobile/viewports.html" target="_blank" rel="external">A tale of two viewports — part one</a>、<a href="http://www.quirksmode.org/mobile/viewports2.html" target="_blank" rel="external">A tale of two viewports — part two</a>。</p>
+<h2 id="link_rel=”index”_和_link_rel=”home”">link rel=”index” 和 link rel=”home”</h2><p><code>&lt;link rel=&quot;index&quot; href=&quot;http://www.apple.com/sitemap/&quot; /&gt;</code> 和 <code>&lt;link rel=&quot;home&quot; href=&quot;http://www.apple.com/&quot; /&gt;</code><br><strong>定义和用法</strong></p>
+<p>rel 属性规定当前文档与被链接文档/资源之间的关系。</p>
+<p>只有当使用 href 属性时，才能使用 rel 属性。</p>
+<hr>
+
+<p><strong>HTML 4.01 与 HTML 5 之间的差异</strong></p>
+<p>已删除的值：appendix, chapter, contents, copyright, glossary, index, section, start, subsection</p>
+<p>新值：archives, author, bookmark, external, first, index, last, license, nofollow, noreferrer, pingback, search, sidebar, tag, up</p>
+<hr>
+
+<p><strong>语法</strong><br><code>&lt;link rel=&quot;value&quot;&gt;</code></p>
+<p><strong>属性值</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">alternate</td>
+<td style="text-align:left">链接到该文档的替代版本（例如打印页、翻译或镜像） </td>
+</tr>
+<tr>
+<td style="text-align:left">author</td>
+<td style="text-align:left">链接到该文档的作者。 </td>
+</tr>
+<tr>
+<td style="text-align:left">help</td>
+<td style="text-align:left">链接到帮助文档。 </td>
+</tr>
+<tr>
+<td style="text-align:left">icon</td>
+<td style="text-align:left">表示该文档的图标。 </td>
+</tr>
+<tr>
+<td style="text-align:left">licence</td>
+<td style="text-align:left">链接到该文档的版权信息。 </td>
+</tr>
+<tr>
+<td style="text-align:left">next</td>
+<td style="text-align:left">集合中的下一个文档。 </td>
+</tr>
+<tr>
+<td style="text-align:left">pingback</td>
+<td style="text-align:left">指向 pingback 服务器的 URL。 </td>
+</tr>
+<tr>
+<td style="text-align:left">prefetch</td>
+<td style="text-align:left">规定应该对目标文档进行缓存。 </td>
+</tr>
+<tr>
+<td style="text-align:left">prev</td>
+<td style="text-align:left">集合中的前一个文档。 </td>
+</tr>
+<tr>
+<td style="text-align:left">search</td>
+<td style="text-align:left">链接到针对文档的搜索工具。 </td>
+</tr>
+<tr>
+<td style="text-align:left">sidebar</td>
+<td style="text-align:left">链接到应该显示在浏览器侧栏的文档。 </td>
+</tr>
+<tr>
+<td style="text-align:left">stylesheet</td>
+<td style="text-align:left">指向要导入的样式表的 URL。 </td>
+</tr>
+<tr>
+<td style="text-align:left">tag</td>
+<td style="text-align:left">描述当前文档的标签（关键词）。 </td>
+</tr>
+</tbody>
+</table>
+<p>可见在 HTML5 中 <code>&lt;link rel=&quot;index&quot;&gt;</code> 已经被删除，但是 <code>&lt;link rel=&quot;home&quot;&gt;</code> 这个值也没有出现在 HTML5 中，仔细搜索一番，原来是和<strong><a href="http://microformats.org/wiki/rel-home" target="_blank" rel="external">微格式</a></strong>有关。</p>
+<h2 id="link_rel=”canonical”">link rel=”canonical”</h2><p><code>rel=&quot;canonical&quot;</code> 属性让搜索引擎知道当前网站中的重复或相似网页中，哪一个页面才是站长想让其抓取与收录的 </p>
+<ul>
+<li>canonical 属性值通常在，rel属性中出现</li>
+<li>引用网址</li>
+<li>canonical 从功能上来讲，可理解为301永久重定向的辅助功能【这种理解是错的，请参见 <a href="http://webdesign.about.com/od/seo/a/rel-canonical.htm" target="_blank" rel="external">What the Rel=Canonical Tag Isn’t</a>】</li>
+<li>canonical 可以与相对链接或绝对链接一起使用，但是建议使用绝对链接</li>
+<li>Google 对 canonical 的定义是：规范网页是一组内容高度相似的网页的首选版本</li>
+</ul>
+<p>在 <a href="http://webdesign.about.com/od/seo/a/rel-canonical.htm" target="_blank" rel="external">What is rel=canonical and Why Should I Use It?</a> 一文中指出不能滥用该属性：</p>
+<blockquote>
+<p>you should never point all your pages to your home page as the canonical page </p>
+</blockquote>
+<p><strong>Good places to use the <code>rel=&quot;canonical&quot;</code> link include:</strong></p>
+<ul>
+<li>Sites with dynamic URLs — You can use it to define which URL format you prefer<br>Ecommerce sites, especiall on product lists — When your customers change the sorting criteria, that new URL doesn’t need to be indexed</li>
+<li>Syndicated content — publishers using the content you wrote should include the rel=canonical link on their pages pointing to your original document</li>
+</ul>
+<blockquote>
+<p>Syndicated content:</p>
+<p>A feed, also known as RSS feed, XML feed, or syndicated content, is website content that can be automatically delivered to your browser.<br>提要（也称为“RSS提要”、“XML提要”或“聚合内容”）是可自动发送给浏览器的网站</p>
+</blockquote>
+<p><code>rel=&quot;canonical&quot;</code> 的另外一种应用案例：</p>
+<p>假设一家网站同时提供了白皮书的 HTML 页面与可下载的 PDF 版本，URL 分别为：<br><code>http://www.example.com/white-paper.html</code><br><code>http://www.example.com/white-paper.pdf</code></p>
+<p>这时，站长可以在 PDF 文件被请求时通过 <code>rel=&quot;canonical&quot;</code> HTTP 头通告 Google 该 PDF 下载版的 canonical URL 就是相应的 HTML 文档;例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /white-paper.pdf HTTP/1.1&#10;Host: www.example.com&#10;(...HTTP &#35831;&#27714;&#22836;&#30340;&#20854;&#20313;&#37096;&#20998;...)</span><br></pre></td></tr></table></figure>
+<p>使用 <code>rel=&quot;canonical&quot;</code> ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK&#10;Content-Type: application/pdf&#10;Link: &#60;http://www.example.com/white-paper.html&#62;; rel=&#34;canonical&#34;&#10;Content-Length: 785710&#10;(... HTTP &#21709;&#24212;&#22836;&#30340;&#20854;&#20313;&#37096;&#20998;...)</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考文献">参考文献</h2><ul>
 <li><a href="https://hsivonen.fi/doctype/" target="_blank" rel="external">Activating Browser Modes with Doctype</a></li>
+<li><a href="http://www.blooberry.com/indexdot/html/tagpages/d/doctype.htm" target="_blank" rel="external">!DOCTYPE</a></li>
+<li><a href="http://www.infoq.com/cn/news/2011/04/html5-design" target="_blank" rel="external">Jeremy Keith谈HTML5设计原则</a></li>
 <li><a href="https://html.spec.whatwg.org/multipage/" target="_blank" rel="external">HTML Living Standard</a></li>
 <li><a href="http://ogp.me/" target="_blank" rel="external">The Open Graph protocol</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2008/02/codes_for_language_names.html" target="_blank" rel="external">语种名称代码</a></li>
 <li><a href="http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry" target="_blank" rel="external">Language Subtag Registry</a></li>
-<li><a href="http://www.ietf.org/rfc/rfc4646.txt" target="_blank" rel="external">RTF 4646</a></li>
+<li><a href="http://www.ietf.org/rfc/bcp/bcp47.txt" target="_blank" rel="external">BCP 47</a></li>
 <li><a href="http://www.zhihu.com/question/20797118" target="_blank" rel="external">网页头部的声明应该是用 lang=”zh” 还是 lang=”zh-cn”？</a></li>
+<li><a href="http://www.loc.gov/standards/iso639-2/php/langcodes-keyword.php?SearchTerm=Chinese&amp;SearchType=ALL&amp;Submit=Go" target="_blank" rel="external">Browse or Search the ISO Language Codes</a></li>
+<li><a href="http://www.w3.org/TR/microdata/" target="_blank" rel="external">HTML Microdata W3C Working Group Note 29 October 2013</a></li>
+<li><a href="http://diveinto.html5doctor.com/extensibility.html" target="_blank" rel="external">Microdata - Dive Into HTML5</a></li>
+<li><a href="http://html5doctor.com/microdata/" target="_blank" rel="external">Extending HTML5 — Microdata </a></li>
+<li><a href="http://www.zhihu.com/question/21856522" target="_blank" rel="external">如何借助HTML5微数据优化网页？</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/?p=2058" target="_blank" rel="external">HTML5扩展之微数据与丰富网页摘要</a></li>
+<li><a href="http://foolip.org/microdatajs/live/" target="_blank" rel="external">Live Microdata</a></li>
+<li><a href="http://schema.org.cn/" target="_blank" rel="external">Schema.org 中文站</a></li>
+<li><a href="http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e" target="_blank" rel="external">What’s the difference if <meta http-equiv="X-UA-Compatible" content="IE=edge"> exists or not?</a></li>
+<li><a href="https://msdn.microsoft.com/library/hh801214.aspx" target="_blank" rel="external">不再支持条件注释</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/ff406036(v=vs.85" target="_blank" rel="external">Document Modes</a>.aspx)</li>
+<li><a href="https://msdn.microsoft.com/en-us/library/ff405803(v=vs.85" target="_blank" rel="external">How Internet Explorer Chooses Between Document Modes</a>.aspx)</li>
+<li><a href="https://msdn.microsoft.com/en-us/library/ff955275(v=vs.85" target="_blank" rel="external">X-UA-Compatibility Meta Tag and HTTP Response Header</a>.aspx)</li>
+<li><a href="http://webdesign.about.com/od/seo/a/rel-canonical.htm" target="_blank" rel="external">What is rel=canonical and Why Should I Use It?</a></li>
 </ul>
 
       
@@ -369,7 +625,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#<!DOCTYPE_html>"><span class="nav-number">1.</span> <span class="nav-text"><!DOCTYPE html></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">3.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#!DOCTYPE_html"><span class="nav-number">1.</span> <span class="nav-text">!DOCTYPE html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prefix=”og:http://ogp-me/ns#“"><span class="nav-number">2.</span> <span class="nav-text">prefix=”og:http://ogp.me/ns#“</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html_lang=”zh-Hans-CN”_还是_html_lang=”zh-CN”"><span class="nav-number">3.</span> <span class="nav-text">html lang=”zh-Hans-CN” 还是 html lang=”zh-CN”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#itemscope_与_itemtype"><span class="nav-number">4.</span> <span class="nav-text">itemscope 与 itemtype</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X-UA-Compatible"><span class="nav-number">5.</span> <span class="nav-text">X-UA-Compatible</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#viewport"><span class="nav-number">6.</span> <span class="nav-text">viewport</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Viewport"><span class="nav-number">6.1.</span> <span class="nav-text">什么是Viewport</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Viewport_基础"><span class="nav-number">6.2.</span> <span class="nav-text">Viewport 基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Viewport_参考资料"><span class="nav-number">6.3.</span> <span class="nav-text">Viewport 参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#link_rel=”index”_和_link_rel=”home”"><span class="nav-number">7.</span> <span class="nav-text">link rel=”index” 和 link rel=”home”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#link_rel=”canonical”"><span class="nav-number">8.</span> <span class="nav-text">link rel=”canonical”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">9.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
