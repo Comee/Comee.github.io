@@ -214,7 +214,7 @@
 <p>可以看到，在浏览中文时已经现实乱码了，修复后的效果如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ShaoxueerdeMac:~ comee$ ssh root@<span class="number">10.0</span>.<span class="number">2.152</span></span><br><span class="line">root@<span class="number">10.0</span>.<span class="number">2.152</span><span class="string">'s password:</span><br><span class="line">Last login: Wed Dec 16 16:08:48 2015 from 10.0.2.7</span><br><span class="line">[root@localhost ~]# ls</span><br><span class="line">anaconda-ks.cfg  公共  模板  视频  图片  文档  下载  音乐  桌面</span><br><span class="line">[root@localhost ~]#</span></span><br></pre></td></tr></table></figure>
 <p>修复后，中文已经可以正常显示了。</p>
-<p>这个问题的出现和OpenSSH server以及OS X ssh terminal client都有关系，所以也就有多种修复方法。</p>
+<p>这个问题的出现和OpenSSH server以及OS X ssh terminal client都有关系，所以也就有多种修复方法。<br><a id="more"></a></p>
 <h2 id="解决方案">解决方案</h2><h3 id="方案一：如果你使用的是苹果的Terminal程序">方案一：如果你使用的是苹果的Terminal程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Terminal &#62; Preferences &#62; Profiles &#62; Select Terminal type such as Basic (default) &#62; Advanced tab</span><br></pre></td></tr></table></figure>
 <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/Bash/Terminal_Profiles_Basic%20Default_Advanced.png" alt="Terminal"></p>
 <p>然后重启 终端程序，再次使用ssh登录远程服务器就OK了。</p>
