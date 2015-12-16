@@ -168,6 +168,103 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/16/OS-X-Terminal-bash-warning-setlocale-LC-CTYPE-cannot-change-locale-UTF-8-No-such-file-or-directory-Fix/">
+                OS X Terminal: -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory Fix
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-12-16
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/bash/">bash</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/16/OS-X-Terminal-bash-warning-setlocale-LC-CTYPE-cannot-change-locale-UTF-8-No-such-file-or-directory-Fix/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/16/OS-X-Terminal-bash-warning-setlocale-LC-CTYPE-cannot-change-locale-UTF-8-No-such-file-or-directory-Fix/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="前言">前言</h2><p>闲来无事，安装了CentOS虚拟机，然后尝试了下ssh登录，结果就遇到了标题上所遇到的错误，特此进行整理。</p>
+<h2 id="现场还原">现场还原</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ShaoxueerdeMac:comee.github.io comee$ ssh root@<span class="number">10.0</span>.<span class="number">2.152</span></span><br><span class="line">root@<span class="number">10.0</span>.<span class="number">2.152</span><span class="string">'s password:</span><br><span class="line">Last login: Wed Dec 16 16:00:59 2015 from 10.0.2.7</span><br><span class="line">-bash: 警告:setlocale: LC_CTYPE: 无法改变区域选项 (UTF-8): 没有那个文件或目录</span><br><span class="line">[root@localhost ~]# ls</span><br><span class="line">anaconda-ks.cfg  ??????  ??????  ??????  ??????  ??????  ??????  ??????  ??????</span><br><span class="line">[root@localhost ~]#</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，在浏览中文时已经现实乱码了，修复后的效果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ShaoxueerdeMac:~ comee$ ssh root@<span class="number">10.0</span>.<span class="number">2.152</span></span><br><span class="line">root@<span class="number">10.0</span>.<span class="number">2.152</span><span class="string">'s password:</span><br><span class="line">Last login: Wed Dec 16 16:08:48 2015 from 10.0.2.7</span><br><span class="line">[root@localhost ~]# ls</span><br><span class="line">anaconda-ks.cfg  公共  模板  视频  图片  文档  下载  音乐  桌面</span><br><span class="line">[root@localhost ~]#</span></span><br></pre></td></tr></table></figure>
+<p>修复后，中文已经可以正常显示了。</p>
+<p>这个问题的出现和OpenSSH server以及OS X ssh terminal client都有关系，所以也就有多种修复方法。</p>
+<h2 id="解决方案">解决方案</h2><h3 id="方案一：如果你使用的是苹果的Terminal程序">方案一：如果你使用的是苹果的Terminal程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Terminal &#62; Preferences &#62; Profiles &#62; Select Terminal type such as Basic (default) &#62; Advanced tab</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/Bash/Terminal_Profiles_Basic%20Default_Advanced.png" alt="Terminal"></p>
+<p>然后重启 终端程序，再次使用ssh登录远程服务器就OK了。</p>
+<h3 id="方案二：阻止OpenSSH将客户端的LC_*变量发送给远程服务器">方案二：阻止OpenSSH将客户端的LC_*变量发送给远程服务器</h3><p>编辑/etc/ssh/ssh_config 或者 /etc/ssh_config 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ShaoxueerdeMac:~ comee$ <span class="built_in">cd</span> /etc</span><br><span class="line">ShaoxueerdeMac:etc comee$ ls | grep ssh</span><br><span class="line">ssh</span><br><span class="line">ShaoxueerdeMac:etc comee$ <span class="built_in">cd</span> ssh</span><br><span class="line">ShaoxueerdeMac:ssh comee$ ls | grep ssh</span><br><span class="line">ssh_config</span><br><span class="line">sshd_config</span><br><span class="line">ShaoxueerdeMac:ssh comee$ sudo vi ssh_config</span><br></pre></td></tr></table></figure>
+<p>删除下面的配置，或者像下面这样注释掉：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SendEnv LANG LC_*</span></span><br></pre></td></tr></table></figure>
+<p>保存变更后的文件，然后就发现OK了。</p>
+<h3 id="方案三：在远程服务器上安装缺失的locale">方案三：在远程服务器上安装缺失的locale</h3><p>使用localedef命令就可以完成（根据提示进行解决）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localedef -i en_US <span class="operator">-f</span> UTF-<span class="number">8</span> en_US.UTF-<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<h2 id="理论">理论</h2><p>和国际化有关，涉及到的库为glibc，可以使用下面的命令查看当前终端上glibc支持的locales。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale <span class="operator">-a</span></span><br></pre></td></tr></table></figure>
+<p>然后可以使用下面的命令查看当前系统的设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">ShaoxueerdeMac:~ comee$ printenv</span><br><span class="line">TERM_PROGRAM=Apple_Terminal</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">TERM=xterm-<span class="number">256</span>color</span><br><span class="line">TMPDIR=/var/folders/tr/nx0vgn050dv8rwllv976c5480000gn/T/</span><br><span class="line">Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.PbivyAvuMD/Render</span><br><span class="line">TERM_PROGRAM_VERSION=<span class="number">361.1</span></span><br><span class="line">TERM_SESSION_ID=<span class="number">102</span>DAF89-<span class="number">43</span>E8-<span class="number">4881</span>-<span class="number">9</span>B4D-<span class="number">161</span>A283FF54D</span><br><span class="line">USER=comee</span><br><span class="line">SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.fqIkSAZ8zC/Listeners</span><br><span class="line">__CF_USER_TEXT_ENCODING=<span class="number">0</span>x1F5:<span class="number">0</span>x0:<span class="number">0</span>x0</span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/bin:/usr/bin:/bin:/usr/sbin:/sbin</span><br><span class="line">PWD=/Users/comee</span><br><span class="line">XPC_FLAGS=<span class="number">0</span>x0</span><br><span class="line">XPC_SERVICE_NAME=<span class="number">0</span></span><br><span class="line">SHLVL=<span class="number">1</span></span><br><span class="line">HOME=/Users/comee</span><br><span class="line">LOGNAME=comee</span><br><span class="line">LC_CTYPE=UTF-<span class="number">8</span></span><br><span class="line">_=/usr/bin/printenv</span><br><span class="line">ShaoxueerdeMac:~ comee$ <span class="built_in">echo</span> <span class="string">"<span class="variable">$LC_CTYPE</span>"</span></span><br><span class="line">UTF-<span class="number">8</span></span><br><span class="line">ShaoxueerdeMac:~ comee$</span><br></pre></td></tr></table></figure>
+<p> 上面的命令输出结果显示了当前locale使用的编码，客户端上的ssh会将其LC<em>*环境变量发送给服务端的sshd服务器。换句话说，SSH will try to set every LC</em>* variable you have set on your local OSX system on the remove server too.</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/09/23/Something-About-HTML/">
                 HTML 大杂烩
               </a>
@@ -880,100 +977,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/06/30/Find-the-last-space-in-Excel/">
-                在 Excel 单元格中查找最后一个空格（Space）的位置
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-06-30
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Excel/">Excel</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/06/30/Find-the-last-space-in-Excel/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/30/Find-the-last-space-in-Excel/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><a href="http://superuser.com/questions/680769/i-need-to-find-the-last-space-in-a-xls-cell">问题描述</a>：</p>
-<blockquote>
-<p>I have an Excel sheet with text values, e.g. in A1: “This is the text”. I need to find the position of the last space character. Is there an excel formula that will give me the result I want? I have tried <code>FIND</code> and <code>SEARCH</code>, however these start from left, what I need is to start from right.</p>
-</blockquote>
-<p>解决办法一：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=FIND(&#34;&#9731;&#34;,SUBSTITUTE(A1,&#34; &#34;,&#34;&#9731;&#34;,LEN(A1)-LEN(SUBSTITUTE(A1,&#34; &#34;,&#34;&#34;))))</span><br></pre></td></tr></table></figure>
-<p>说明：</p>
-<blockquote>
-<ol>
-<li><code>LEN(A1)-LEN(SUBSTITUTE(A1,&quot; &quot;,&quot;&quot;))</code> gives you the number of spaces, let’s call it x,</li>
-<li><code>SUBSTITUTE(A1,&quot; &quot;,&quot;☃&quot;,[x])</code> will replace the xth space (so the last one) by a snowman,</li>
-<li><code>FIND(&quot;☃&quot;,[...])</code> will give you the position of the snowman. Which is the position of the last space.</li>
-</ol>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/30/Find-the-last-space-in-Excel/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1012,21 +1015,21 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
