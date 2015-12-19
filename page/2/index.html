@@ -168,6 +168,169 @@
           
           
             
+              <a class="post-title-link" href="/2015/07/09/ORA-01555-Snapshot-Too-Old/">
+                ORA-01555 问题记录
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-09
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Oracle/">Oracle</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/07/09/ORA-01555-Snapshot-Too-Old/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/09/ORA-01555-Snapshot-Too-Old/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/Oracle/undo_segment_and_consistent_read.jpg" alt="undo_segment_and_consistent_read"><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/09/ORA-01555-Snapshot-Too-Old/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015/07/04/Excel-VBA-ExtractTheLastSuccessiveNumbers/">
+                Excel VBA: 提取最后一连串数字
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-04
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Excel/">Excel</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/07/04/Excel-VBA-ExtractTheLastSuccessiveNumbers/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/04/Excel-VBA-ExtractTheLastSuccessiveNumbers/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>提取最后一连串数字，采用从后往前查找的方式，程序中限定了返回结果字符串的长度必须为 15 或 16 或者 17 。</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> ExtractTheLastSuccessiveNumbers()</span><br><span class="line"><span class="comment">'Update by 20150702</span></span><br><span class="line"><span class="keyword">Dim</span> Rng <span class="keyword">As</span> Range</span><br><span class="line"><span class="keyword">Dim</span> WorkRng <span class="keyword">As</span> Range</span><br><span class="line"><span class="keyword">Dim</span> xValue <span class="keyword">As</span> <span class="built_in">String</span></span><br><span class="line"><span class="keyword">Dim</span> OutValue <span class="keyword">As</span> <span class="built_in">String</span></span><br><span class="line"><span class="keyword">Dim</span> PreviousIsNumber <span class="keyword">As</span> <span class="built_in">Boolean</span></span><br><span class="line"><span class="keyword">Dim</span> Find <span class="keyword">As</span> <span class="built_in">Boolean</span></span><br><span class="line"><span class="keyword">Dim</span> index <span class="keyword">As</span> <span class="built_in">Integer</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">xTitleId = <span class="string">"QQ的小工具箱[逆序读取]"</span></span><br><span class="line"><span class="keyword">Set</span> WorkRng = Application.Selection</span><br><span class="line"><span class="keyword">Set</span> WorkRng = Application.InputBox(<span class="string">"选择数据范围"</span>, xTitleId, WorkRng.Address, Type:=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">For</span> <span class="keyword">Each</span> Rng <span class="keyword">In</span> WorkRng</span><br><span class="line">    OutValue = <span class="string">""</span></span><br><span class="line">    PreviousIsNumber = <span class="literal">False</span></span><br><span class="line">    Find = <span class="literal">False</span></span><br><span class="line">    xValue = Rng.Value</span><br><span class="line">    index = VBA.Len(xValue) + <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">For</span> i = <span class="number">1</span> <span class="keyword">To</span> VBA.Len(xValue)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">If</span> VBA.IsNumeric(VBA.<span class="keyword">Mid</span>(xValue, index - i, <span class="number">1</span>)) <span class="keyword">Then</span></span><br><span class="line">                </span><br><span class="line">            Find = <span class="literal">True</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">If</span> PreviousIsNumber <span class="keyword">Then</span></span><br><span class="line">                OutValue = VBA.<span class="keyword">Mid</span>(xValue, index - i, <span class="number">1</span>) &amp; OutValue</span><br><span class="line">            <span class="keyword">Else</span></span><br><span class="line">                OutValue = VBA.<span class="keyword">Mid</span>(xValue, index - i, <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">            PreviousIsNumber = <span class="literal">True</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            PreviousIsNumber = <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">If</span> Find <span class="keyword">Then</span></span><br><span class="line">                <span class="keyword">Exit</span> <span class="keyword">For</span></span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line">    </span><br><span class="line">    Rng.NumberFormat = <span class="string">"@"</span></span><br><span class="line">    <span class="comment">'Rng.NumberFormat = "0"</span></span><br><span class="line">    <span class="keyword">If</span> VBA.Len(OutValue) = <span class="number">15</span> <span class="keyword">Or</span> VBA.Len(OutValue) = <span class="number">16</span> <span class="keyword">Or</span> VBA.Len(OutValue) = <span class="number">17</span> <span class="keyword">Then</span></span><br><span class="line">        Rng.Value = OutValue</span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        Rng.Value = <span class="string">""</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/04/Excel-VBA-ExtractTheLastSuccessiveNumbers/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/06/30/Find-the-last-space-in-Excel/">
                 在 Excel 单元格中查找最后一个空格（Space）的位置
               </a>
@@ -835,92 +998,11 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/03/12/Build-your-blog-with-Hexo/">
-                Build your blog with Hexo
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-03-12
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Hexo/">Hexo</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/12/Build-your-blog-with-Hexo/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/12/Build-your-blog-with-Hexo/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><img src="http://7xi5qz.com1.z0.glb.clouddn.com/Hexo/github_hexo_blog.png" alt="Github+Hexo=Blog" title="Github+Hexo=Blog"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/12/Build-your-blog-with-Hexo/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
   <div class="pagination">
-    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
   </div>
 
 
@@ -954,21 +1036,21 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
