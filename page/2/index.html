@@ -168,6 +168,84 @@
           
           
             
+              <a class="post-title-link" href="/2015/07/18/Kill-Process-By-Port-Number/">
+                根据端口号来杀死进程
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-18
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Batch/">Batch</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/07/18/Kill-Process-By-Port-Number/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/18/Kill-Process-By-Port-Number/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>根据端口号获得进程的 pid，然后 <code>taskkill</code> 命令杀死进程。</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">echo</span> off</span><br><span class="line">:wait_a_port</span><br><span class="line"><span class="keyword">set</span> port=</span><br><span class="line"><span class="keyword">echo</span>.&amp;<span class="keyword">set</span> /p port=Please input port number:</span><br><span class="line"><span class="built_in">cls</span></span><br><span class="line"><span class="flow">if</span> <span class="flow">not</span> <span class="flow">defined</span> port <span class="flow">goto</span> :wait_a_port</span><br><span class="line"></span><br><span class="line"><span class="flow">for</span> /f "tokens=<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>" <span class="envvar">%%a</span> <span class="flow">in</span> ('netstat -ano^|<span class="built_in">find</span> /i ":<span class="envvar">%port%</span> "') <span class="flow">do</span> <span class="flow">if</span> <span class="flow">not</span> "<span class="envvar">%%c</span>"=="" (<span class="keyword">set</span> pid=<span class="envvar">%%c</span>) <span class="flow">else</span> (<span class="keyword">set</span> pid=<span class="envvar">%%b</span>)</span><br><span class="line"><span class="flow">for</span> /f "tokens=<span class="number">1</span>" <span class="envvar">%%a</span> <span class="flow">in</span> ('tasklist /fi "pid eq <span class="envvar">%pid%</span>"') <span class="flow">do</span> <span class="keyword">set</span> prog=<span class="envvar">%%a</span></span><br><span class="line"><span class="keyword">echo</span> Port Number：<span class="envvar">%port%</span></span><br><span class="line"><span class="keyword">echo</span> PID：<span class="envvar">%pid%</span></span><br><span class="line"><span class="keyword">echo</span> Process：<span class="envvar">%prog%</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> n=</span><br><span class="line"><span class="keyword">echo</span>.&amp;<span class="keyword">set</span> /p n=Please input pid to kill it:</span><br><span class="line"></span><br><span class="line"><span class="flow">if</span> <span class="flow">defined</span> n (<span class="keyword">echo</span>.&amp;<span class="winutils">taskkill</span> /f /fi "pid eq <span class="envvar">%pid%</span>")</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span>.&amp;<span class="keyword">echo</span> Press to <span class="flow">exit</span> ...</span><br><span class="line"><span class="built_in">pause</span>&gt;<span class="stream">nul</span></span><br><span class="line"><span class="flow">exit</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/07/09/ORA-01555-Snapshot-Too-Old/">
                 ORA-01555 问题记录
               </a>
@@ -906,98 +984,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/03/19/VisualSVN-Server-Hook-No-Delete/">
-                VisualSVN Server Hook: No Delete
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-03-19
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/SVN/">SVN</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/19/VisualSVN-Server-Hook-No-Delete/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/19/VisualSVN-Server-Hook-No-Delete/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="Subversion_Repository_Hooks"><a href="https://www.visualsvn.com/support/svnbook/ref/reposhooks/">Subversion Repository Hooks</a></h2><p>These are the repository hooks that Subversion provides:</p>
-<ul>
-<li>start-commit</li>
-<li>pre-commit</li>
-<li>post-commit</li>
-<li>pre-revprop-change</li>
-<li>post-revprop-change</li>
-<li>pre-lock</li>
-<li>post-lock</li>
-<li>pre-unlock</li>
-<li>post-unlock</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/19/VisualSVN-Server-Hook-No-Delete/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1036,21 +1022,21 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -1096,8 +1082,8 @@
       <div class="footer-inner">
         <div class="copyright">
   
-  &copy; &nbsp; 
-  2015
+  &copy; &nbsp;  2015 - 
+  2016
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
